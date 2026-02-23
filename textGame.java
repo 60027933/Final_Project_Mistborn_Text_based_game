@@ -1,32 +1,68 @@
+// Import the ArrayList class
 import java.util.*;
-import java.util.ArrayList; // Import the ArrayList class
 
 // enum inventory objs;
 class textGame {
     //ENUMS:
     enum turnType {
-        IMMEDIATE,
-        SPECIAL,
-        REGULAR
+        IMMEDIATE, // non area specific, time-based events
+        SPECIAL, // area specific, time-based events
+        REGULAR // area specific, non-time based events
     }
     enum turnOptions {
         TRAVEL,
         SLEEP,
         EXPLORE
     }
+    enum areas {
+        // CENTRAL DOMINANCE:
+        LUTHADEL, // culteral and political center of final empire. Major nobles have keeps there. "City of a thousand spires"
+        FELLIS, // prosperous, clean suburban city near luthadel, for nobles who do not wish to live in luthadel
+        TRESTING, // skaa plantation. burned to the ground at the start of the series.
+        HATHSIN // pits of hathsin, deadly skaa labour camp wherin only one person has survived (kelsier).
+        //skaa climb down suffocatingly narrow gorges and reach into crystal-lines niches to find geodes that contain atium.
+    }
     public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+
         int year = 0;
         int month = 0;
         int day = 0;
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
-        
+        areas location = areas.TRESTING;
+        if(beginStory(s)){
+        // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
+        // no knowledge of allomancy or anything; as you encounter it it will be explained.
+
         //enum list inventory dynamic array?
         //from inventory array: select weapon, store that in variable
 
         // location / map here?
         //each location needs a certain number of related 'filler' events
-    }
 
+
+
+        
+    
+        }
+        s.close();
+    }
+    public static boolean beginStory(Scanner s){
+        boolean returnValue = true;
+        System.out.println("Welcome to the MISTBORN ADVENTURE GAME.\n\n");
+        boolean understanding = option(s, "Have you read mistborn?", "Yes","No");
+        if(!understanding){
+            boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
+            if(!spoilers) System.out.println("Go read Mistborn it good. This game can wait fr"); returnValue = false;
+            if(!understanding && spoilers) {
+                System.out.println("Okay so Mistborn is a series of epic fantasy novels by the American author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
+                System.out.println("");
+            
+            }   
+        }
+        else System.out.println("\nGood, because there is spoilers in this game.");
+        return returnValue;
+    }
     public static void gameTurn(){
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
@@ -58,17 +94,38 @@ class textGame {
 
 
 
-    public static String getInput(){
-        Scanner scanner = new Scanner(System.in);
-        String stringInput = scanner.next();
-        scanner.close();
+    public static String getInput(Scanner s){
+        String stringInput = s.nextLine();
         return stringInput;
     }
-    public static String cleanInput(String input, boolean oneWord) {
+
+    public static String cleanText(String input, boolean oneWord) {
         // clean input: lowercase it, remove extra spaces if OneWord
         input = input.toLowerCase();
         if(oneWord) input = input.replaceAll("\\s", "");
         return input;
+    }
+    public static boolean option(Scanner s, String prompt, String expectedValue, String negatoryValue){ // SINGLE OPTION for true / false type questions
+        System.out.println(String.format("%s (%s, %s)",prompt,expectedValue,negatoryValue));
+        // clean the text for comparisons
+        expectedValue = cleanText(expectedValue, false);
+        negatoryValue = cleanText(negatoryValue, false);
+        
+        boolean returnValue;
+        while(true) {
+            System.out.print(">>> ");
+            String input = cleanText(getInput(s),false);
+
+            if(input.equals(expectedValue)) {
+                returnValue = true;
+                break;
+            }
+            if(input.equals(negatoryValue)){
+                returnValue = false;
+                break;
+            }
+        }
+        return returnValue;
     }
 
 }
