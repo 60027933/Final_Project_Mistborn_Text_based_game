@@ -1,4 +1,5 @@
 // Import the ArrayList class
+import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
 
 // enum inventory objs;
@@ -31,7 +32,7 @@ class textGame {
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
         areas location = areas.TRESTING;
         if(checkPlayerUnderstanding(s)){
-            beginStory();
+            beginStory(s);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -62,10 +63,14 @@ class textGame {
             }   
         }
         else printS("\nGood, because there is spoilers in this game.");
+        pause();
         return returnValue;
     }
-    public static void beginStory(){
-        printS("Alright so like ");
+    public static void beginStory(Scanner s){
+        printS("\nYou are a skaa working the fields in the Tresting Plantation. It is burned down by kelsier, and then you escape.");
+        pause();
+        printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
+        wait(s);
     }
     public static void gameTurn(){
         //first: is there any immediate time based events that are happening right now? if so do that
@@ -143,6 +148,19 @@ class textGame {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+    public static void pause(){
+        try{
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            System.out.println("Thread was interrupted.");
+            Thread.currentThread().interrupt();
+        }
+    }
+    public static void wait(Scanner s){
+        // wait for player to hit enter
+        System.out.print("\n(enter)");
+        s.nextLine();
     }
 }
 
