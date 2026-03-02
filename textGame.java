@@ -19,8 +19,8 @@ class textGame {
         LUTHADEL, // culteral and political center of final empire. Major nobles have keeps there. "City of a thousand spires"
         FELLIS, // prosperous, clean suburban city near luthadel, for nobles who do not wish to live in luthadel
         TRESTING, // skaa plantation. burned to the ground at the start of the series.
-        HATHSIN // pits of hathsin, deadly skaa labour camp wherin only one person has survived (kelsier).
-        //skaa climb down suffocatingly narrow gorges and reach into crystal-lines niches to find geodes that contain atium.
+        HATHSIN // pits of hathsin, skaa labour camp where only one person has survived (kelsier).
+        //'skaa climb down suffocatingly narrow gorges and reach into crystal-lines niches to find geodes that contain atium.'
     }
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
@@ -30,7 +30,8 @@ class textGame {
         int day = 0;
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
         areas location = areas.TRESTING;
-        if(beginStory(s)){
+        if(checkPlayerUnderstanding(s)){
+            beginStory();
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -47,21 +48,24 @@ class textGame {
         }
         s.close();
     }
-    public static boolean beginStory(Scanner s){
+    public static boolean checkPlayerUnderstanding(Scanner s){
         boolean returnValue = true;
-        System.out.println("Welcome to the MISTBORN ADVENTURE GAME.\n\n");
+        printS("Welcome to the MISTBORN ADVENTURE GAME.\n\n");
         boolean understanding = option(s, "Have you read mistborn?", "Yes","No");
         if(!understanding){
             boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
             if(!spoilers) System.out.println("Go read Mistborn it good. This game can wait fr"); returnValue = false;
             if(!understanding && spoilers) {
-                System.out.println("Okay so Mistborn is a series of epic fantasy novels by the American author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
+                printS("Okay so Mistborn is a series of epic fantasy novels by the American author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
                 System.out.println("");
             
             }   
         }
-        else System.out.println("\nGood, because there is spoilers in this game.");
+        else printS("\nGood, because there is spoilers in this game.");
         return returnValue;
+    }
+    public static void beginStory(){
+        printS("Alright so like ");
     }
     public static void gameTurn(){
         //first: is there any immediate time based events that are happening right now? if so do that
@@ -106,7 +110,7 @@ class textGame {
         return input;
     }
     public static boolean option(Scanner s, String prompt, String expectedValue, String negatoryValue){ // SINGLE OPTION for true / false type questions
-        System.out.println(String.format("%s (%s, %s)",prompt,expectedValue,negatoryValue));
+        printS(String.format("%s (%s, %s)\n",prompt,expectedValue,negatoryValue));
         // clean the text for comparisons
         expectedValue = cleanText(expectedValue, false);
         negatoryValue = cleanText(negatoryValue, false);
@@ -127,7 +131,19 @@ class textGame {
         }
         return returnValue;
     }
-
+    public static void printS(String text){
+        //print slow
+        for(int i = 0; i < text.length(); i++){
+            try{
+                System.out.print(text.charAt(i));
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                System.out.println("Thread was interrupted.");
+                // best practice somehow?
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
 }
 
 
