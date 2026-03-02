@@ -28,11 +28,12 @@ class textGame {
 
         int year = 0;
         int month = 0;
-        int day = 0;
+        int day = 1;
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
         areas location = areas.TRESTING;
         if(checkPlayerUnderstanding(s)){
             beginStory(s);
+            gameTurn(year,month,day);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -72,7 +73,8 @@ class textGame {
         printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
         wait(s);
     }
-    public static void gameTurn(){
+    public static void gameTurn(int year, int month, int day){
+        printDate(year,month,day);
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
@@ -161,6 +163,13 @@ class textGame {
         // wait for player to hit enter
         System.out.print("\n(enter)");
         s.nextLine();
+    }
+    public static void printDate(int year, int month, int day){
+        String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
+        System.out.print(String.format("%s %d of year %d",months[month],day,year));
+    }
+    public static void addDay(int year, int month, int day){
+
     }
 }
 
