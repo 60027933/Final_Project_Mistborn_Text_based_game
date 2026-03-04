@@ -33,7 +33,7 @@ class textGame {
         areas location = areas.TRESTING;
         if(checkPlayerUnderstanding(s)){
             beginStory(s);
-            gameTurn(year,month,day);
+            gameTurn(year,month,day,s);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -73,19 +73,22 @@ class textGame {
         printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
         wait(s);
     }
-    public static void gameTurn(int year, int month, int day){
+    public static void gameTurn(int year, int month, int day, Scanner s){
         printDate(year,month,day);
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
+        regularTurn(s);
     }
     public static void clear(){
         // clear the screen.
     }
-    public static void regularTurn(){
+    public static void regularTurn(Scanner s){
         // give options to player,
         // travel, sleep, explore
-    
+        String[] options = {"Travel", "Sleep", "Explore"};
+        int optionChose = options(s,"You can: ", options);
+        printS(String.format("%d",optionChose));
         // give options function
 
         //      travel: select "travel event", travel to selected location
@@ -95,7 +98,7 @@ class textGame {
     }
     public static turnOptions giveTurnOptions(){ // REGULAR TURN
         turnOptions optionPicked = turnOptions.SLEEP;
-            // clear screen, display log, and give options,
+        
             // get input
             // clean input
         
@@ -138,6 +141,29 @@ class textGame {
         }
         return returnValue;
     }
+
+    public static int options(Scanner s, String prompt, String[] values){ // MULTIPLE OPTION 
+        printS(prompt + " (");
+        for(int i = 0; i < values.length-1; i++) printS(String.format("%s, ", (values[i].toString())));
+        printS(String.format("%s)\n",values[values.length-1].toString()));
+        // clean the text for comparisons
+        for(int z = 0; z < values.length; z++) values[z] = cleanText(values[z],true);
+        
+        int returnValue = -1; // 
+        boolean breakLoop = false;
+        while(!breakLoop) {
+            System.out.print(">>> ");
+            String input = cleanText(getInput(s),false);
+            for(int i = 0; i < values.length; i++) {
+                if(input.equals(values[i].toString())){
+                    returnValue = i;
+                    breakLoop = true;
+                }
+            }
+        }
+        return returnValue; // 
+    }
+
     public static void printS(String text){
         //print slow
         for(int i = 0; i < text.length(); i++){
@@ -166,7 +192,7 @@ class textGame {
     }
     public static void printDate(int year, int month, int day){
         String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
-        System.out.print(String.format("%s %d of year %d",months[month],day,year));
+        printS(String.format("%s %d of year %d\n",months[month],day,year));
     }
     public static void addDay(int year, int month, int day){
 
