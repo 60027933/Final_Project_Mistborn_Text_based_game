@@ -29,11 +29,13 @@ class textGame {
         int year = 0;
         int month = 0;
         int day = 1;
+        int health = 100;
+        
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
         areas location = areas.TRESTING;
         if(checkPlayerUnderstanding(s)){
             beginStory(s);
-            gameTurn(year,month,day,s);
+            gameTurn(year,month,day,s,health);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -73,22 +75,30 @@ class textGame {
         printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
         wait(s);
     }
-    public static void gameTurn(int year, int month, int day, Scanner s){
+    public static void gameTurn(int year, int month, int day, Scanner s, int health){
         printDate(year,month,day);
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
-        regularTurn(s);
+        regularTurn(s, health);
     }
     public static void clear(){
         // clear the screen.
     }
-    public static void regularTurn(Scanner s){
+    public static void regularTurn(Scanner s, int health){
         // give options to player,
         // travel, sleep, explore
-        String[] options = {"Travel", "Sleep", "Explore"};
-        int optionChose = options(s,"You can: ", options);
-        printS(String.format("%d",optionChose));
+        turnOptions turn = giveTurnOptions(s);
+        if(turn == turnOptions.SLEEP) {
+            sleep(health);
+        }
+        if(turn == turnOptions.EXPLORE){
+            explore(health);
+        }
+        if(turn == turnOptions.TRAVEL) {
+            travel();
+        }
+        
         // give options function
 
         //      travel: select "travel event", travel to selected location
@@ -96,17 +106,35 @@ class textGame {
         //      explore: local "filler" events
 
     }
-    public static turnOptions giveTurnOptions(){ // REGULAR TURN
+
+    public static turnOptions giveTurnOptions(Scanner s){ // REGULAR TURN
         turnOptions optionPicked = turnOptions.SLEEP;
-        
-            // get input
-            // clean input
+        String[] options = {"Travel", "Sleep", "Explore"};
+        int optionChose = options(s,"You can: ", options);
+        printS(String.format("%d",optionChose));
+        switch(optionChose){
+            case 0:
+                optionPicked = turnOptions.TRAVEL;
+            case 1:
+                optionPicked = turnOptions.SLEEP;
+            case 2:
+                optionPicked = turnOptions.EXPLORE;
+        }
         
         return optionPicked;
     }
     
+    public static void travel(){
+        //give map, get travel option, add days according to distance, and then 
+    }
+    public static void sleep(int health){
+        // So the player sleeps, a day passes, and you gain health.
+        health = 100; // change so that it can dynamically change?
+        printS("You sleep, regaining some health.");
+    }
+    public static void explore(int health){
 
-
+    }
 
     public static String getInput(Scanner s){
         String stringInput = s.nextLine();
@@ -194,7 +222,7 @@ class textGame {
         String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
         printS(String.format("%s %d of year %d\n",months[month],day,year));
     }
-    public static void addDay(int year, int month, int day){
+    public static void addDay(int year, int month, int day, int add){
 
     }
 }
