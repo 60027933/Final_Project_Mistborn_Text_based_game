@@ -81,6 +81,10 @@ class textGame {
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
         regularTurn(s, health);
+        //then, recursively call itself until the final event in (assume it's like year three or something)
+        if(year < 3) {
+            gameTurn(year, month, day, s, health);
+        }
     }
     public static void clear(){
         // clear the screen.
@@ -99,12 +103,6 @@ class textGame {
             travel();
         }
         
-        // give options function
-
-        //      travel: select "travel event", travel to selected location
-        //      sleep: gain health, stamina
-        //      explore: local "filler" events
-
     }
 
     public static turnOptions giveTurnOptions(Scanner s){ // REGULAR TURN
@@ -223,7 +221,15 @@ class textGame {
         printS(String.format("%s %d of year %d\n",months[month],day,year));
     }
     public static void addDay(int year, int month, int day, int add){
+        String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
 
+        int january, march, may, july, august, october, december = 31; // these months have 31 days
+        int april, june, september, november = 30;
+        int february = 28;
+        // So keep track of days of the month, flip months accordingly
+        day += 1;
+        
+        //if the month is flipped to january, flip the year as well
     }
 }
 
