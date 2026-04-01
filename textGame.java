@@ -76,6 +76,7 @@ class textGame {
         wait(s);
     }
     public static void gameTurn(int year, int month, int day, Scanner s, int health){
+        addDay(year, month, day, 1);
         printDate(year,month,day);
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
@@ -222,13 +223,38 @@ class textGame {
     }
     public static void addDay(int year, int month, int day, int add){
         String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
-
-        int january, march, may, july, august, october, december = 31; // these months have 31 days
-        int april, june, september, november = 30;
-        int february = 28;
+        
+        ArrayList<String> days31 = new ArrayList<String>();
+        days31.add("January"); days31.add("March");days31.add("May");days31.add("July"); days31.add("October"); days31.add("December");
+        ArrayList<String> days30 = new ArrayList<String>();
+        days30.add("April"); days30.add("June"); days30.add("September"); days30.add("November");
         // So keep track of days of the month, flip months accordingly
         day += 1;
-        
+        // february first
+        switch(day){
+            case 28:
+                if(month == 1){
+                    day = 1;
+                    month++;
+                     // february
+                }
+                break;
+            case 30:
+                for(int i = 0; i < days30.size(); i++){
+                    if(months[day].equals(days30.get(i))){
+                        month++;
+                        day = 1;
+                    }
+                }
+                break;
+            case 31:
+                for(int i = 0; i < days31.size(); i++){
+                    if(months[day].equals(days31.get(i))){
+                        month++;
+                        day = 1;
+                    }
+                }
+        }
         //if the month is flipped to january, flip the year as well
     }
 }
