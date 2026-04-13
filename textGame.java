@@ -23,19 +23,25 @@ class textGame {
         HATHSIN // pits of hathsin, skaa labour camp where only one person has survived (kelsier).
         //'skaa climb down suffocatingly narrow gorges and reach into crystal-lines niches to find geodes that contain atium.'
     }
+    static class calandar {
+        int year, month, day;
+        public calandar(int year, int month, int day){
+            this.year = year;
+            this.month = month;
+            this.day = day;
+        }
+    }
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
+        calandar time = new calandar(0,0,0);
 
-        int year = 0;
-        int month = 0;
-        int day = 1;
         int health = 100;
         
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
         areas location = areas.TRESTING;
         if(checkPlayerUnderstanding(s)){
             beginStory(s);
-            gameTurn(year,month,day,s,health);
+            gameTurn(time,s,health);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -65,7 +71,7 @@ class textGame {
             
             }   
         }
-        else printS("\nGood, because there is spoilers in this game.");
+        else printS("\nGood, because there are spoilers in this game.");
         pause();
         return returnValue;
     }
@@ -75,16 +81,16 @@ class textGame {
         printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
         wait(s);
     }
-    public static void gameTurn(int year, int month, int day, Scanner s, int health){
-        addDay(year, month, day, 1);
-        printDate(year,month,day);
+    public static void gameTurn(calandar time, Scanner s, int health){
+        time = addDay(time, 1);
+        printDate(time);
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
         regularTurn(s, health);
         //then, recursively call itself until the final event in (assume it's like year three or something)
-        if(year < 3) {
-            gameTurn(year, month, day, s, health);
+        if(time.year < 3) {
+            gameTurn(time, s, health);
         }
     }
     public static void clear(){
@@ -110,7 +116,6 @@ class textGame {
         turnOptions optionPicked = turnOptions.SLEEP;
         String[] options = {"Travel", "Sleep", "Explore"};
         int optionChose = options(s,"You can: ", options);
-        printS(String.format("%d",optionChose));
         switch(optionChose){
             case 0:
                 optionPicked = turnOptions.TRAVEL;
@@ -217,11 +222,11 @@ class textGame {
         System.out.print("\n(enter)");
         s.nextLine();
     }
-    public static void printDate(int year, int month, int day){
+    public static void printDate(calandar time){
         String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
-        printS(String.format("%s %d of year %d\n",months[month],day,year));
+        printS(String.format("\n%s %d of year %d\n",months[time.month],time.day,time.year));
     }
-    public static void addDay(int year, int month, int day, int add){
+    public static calandar addDay(calandar time, int add){
         String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
         
         ArrayList<String> days31 = new ArrayList<String>();
@@ -229,33 +234,34 @@ class textGame {
         ArrayList<String> days30 = new ArrayList<String>();
         days30.add("April"); days30.add("June"); days30.add("September"); days30.add("November");
         // So keep track of days of the month, flip months accordingly
-        day += 1;
+        time.day += 1;
         // february first
-        switch(day){
+        switch(time.day){
             case 28:
-                if(month == 1){
-                    day = 1;
-                    month++;
+                if(time.month == 1){
+                    time.day = 1;
+                    time.month++;
                      // february
                 }
                 break;
             case 30:
                 for(int i = 0; i < days30.size(); i++){
-                    if(months[day].equals(days30.get(i))){
-                        month++;
-                        day = 1;
+                    if(months[time.day].equals(days30.get(i))){
+                        time.month++;
+                        time.day = 1;
                     }
                 }
                 break;
             case 31:
                 for(int i = 0; i < days31.size(); i++){
-                    if(months[day].equals(days31.get(i))){
-                        month++;
-                        day = 1;
+                    if(months[time.day].equals(days31.get(i))){
+                        time.month++;
+                        time.day = 1;
                     }
                 }
         }
         //if the month is flipped to january, flip the year as well
+        return time;
     }
 }
 
