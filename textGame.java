@@ -13,7 +13,8 @@ class textGame {
     enum turnOptions {
         TRAVEL,
         SLEEP,
-        EXPLORE
+        EXPLORE,
+        STATUS
     }
     enum areas {
         // CENTRAL DOMINANCE:
@@ -86,7 +87,7 @@ class textGame {
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
-        regularTurn(s, health);
+        regularTurn(s, health, time);
         //then, recursively call itself until the final event in (assume it's like year three or something)
         if(time.year < 3) {
             gameTurn(time, s, health);
@@ -95,7 +96,7 @@ class textGame {
     public static void clear(){
         // clear the screen.
     }
-    public static void regularTurn(Scanner s, int health){
+    public static void regularTurn(Scanner s, int health, calandar time){
         // give options to player,
         // travel, sleep, explore
         turnOptions turn = giveTurnOptions(s);
@@ -108,12 +109,16 @@ class textGame {
         if(turn == turnOptions.TRAVEL) {
             travel();
         }
+        if(turn == turnOptions.STATUS) {
+            status(health, time);
+            regularTurn(s,health,time);
+        }
         
     }
 
     public static turnOptions giveTurnOptions(Scanner s){ // REGULAR TURN
         turnOptions optionPicked = turnOptions.SLEEP;
-        String[] options = {"Travel", "Sleep", "Explore"};
+        String[] options = {"Travel", "Sleep", "Explore", "Status"};
         int optionChose = options(s,"You can: ", options);
         switch(optionChose){
             case 0:
@@ -124,6 +129,9 @@ class textGame {
                 break;
             case 2:
                 optionPicked = turnOptions.EXPLORE;
+                break;
+            case 3:
+                optionPicked = turnOptions.STATUS;
                 break;
         }
         return optionPicked;
@@ -141,8 +149,10 @@ class textGame {
         
         return health;
     }
-    public static void status(){
-
+    public static void status(int health, calandar time){
+        printS("Today is: ");
+        printDate(time);
+        printS("Your health is: \n" + health + "\n");
     }
 
     public static String getInput(Scanner s){
