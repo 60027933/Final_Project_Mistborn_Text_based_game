@@ -39,7 +39,8 @@ class textGame {
         
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
         areas location = areas.TRESTING;
-        if(checkPlayerUnderstanding(s)){
+
+        /*if(checkPlayerUnderstanding(s)){
             beginStory(s);
             gameTurn(time,s,health);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
@@ -51,11 +52,9 @@ class textGame {
         // location / map here?
         //each location needs a certain number of related 'filler' events
 
-
-
-        
-    
         }
+        */ // FOR QUICKER TESTS:
+        gameTurn(time, s, health);
         s.close();
     }
     public static boolean checkPlayerUnderstanding(Scanner s){
@@ -66,7 +65,7 @@ class textGame {
             boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
             if(!spoilers) System.out.println("Go read Mistborn it good. This game can wait fr"); returnValue = false;
             if(!understanding && spoilers) {
-                printS("Okay so Mistborn is a series of epic fantasy novels by the American author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
+                printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
                 System.out.println("");
             
             }   
@@ -76,7 +75,7 @@ class textGame {
         return returnValue;
     }
     public static void beginStory(Scanner s){
-        printS("\nYou are a skaa working the fields in the Tresting Plantation. It is burned down by kelsier, and then you escape.");
+        printS("\nYou are a skaa working the fields in the Tresting Plantation. You decide to escape after the plantation is burned.");
         pause();
         printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
         wait(s);
@@ -100,6 +99,7 @@ class textGame {
         // give options to player,
         // travel, sleep, explore
         turnOptions turn = giveTurnOptions(s);
+        System.out.println(turn);
         if(turn == turnOptions.SLEEP) {
             sleep(health);
         }
@@ -119,12 +119,15 @@ class textGame {
         switch(optionChose){
             case 0:
                 optionPicked = turnOptions.TRAVEL;
+                break;
             case 1:
                 optionPicked = turnOptions.SLEEP;
+                break;
             case 2:
                 optionPicked = turnOptions.EXPLORE;
+                break;
         }
-        
+        System.out.println("Input of " + optionChose + " resulted in output " + optionPicked);
         return optionPicked;
     }
     
@@ -189,6 +192,8 @@ class textGame {
             for(int i = 0; i < values.length; i++) {
                 if(input.equals(values[i].toString())){
                     returnValue = i;
+                    System.out.println("Input " + input +" resulted in output " + returnValue);
+
                     breakLoop = true;
                 }
             }
