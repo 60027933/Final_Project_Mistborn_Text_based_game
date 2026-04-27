@@ -99,12 +99,11 @@ class textGame {
         // give options to player,
         // travel, sleep, explore
         turnOptions turn = giveTurnOptions(s);
-        System.out.println(turn);
         if(turn == turnOptions.SLEEP) {
-            sleep(health);
+            health = sleep(health);
         }
         if(turn == turnOptions.EXPLORE){
-            explore(health);
+            health = explore(health);
         }
         if(turn == turnOptions.TRAVEL) {
             travel();
@@ -127,19 +126,22 @@ class textGame {
                 optionPicked = turnOptions.EXPLORE;
                 break;
         }
-        System.out.println("Input of " + optionChose + " resulted in output " + optionPicked);
         return optionPicked;
     }
     
     public static void travel(){
         //give map, get travel option, add days according to distance, and then 
     }
-    public static void sleep(int health){
+    public static int sleep(int health){
         // So the player sleeps, a day passes, and you gain health.
-        health = 100; // change so that it can dynamically change?
-        printS("You sleep, regaining some health.");
+        printS("You sleep, regaining some health. Health is now 100\n");
+        return health = 100; // change so that it can dynamically change?
     }
-    public static void explore(int health){
+    public static int explore(int health){
+        
+        return health;
+    }
+    public static void status(){
 
     }
 
@@ -192,8 +194,6 @@ class textGame {
             for(int i = 0; i < values.length; i++) {
                 if(input.equals(values[i].toString())){
                     returnValue = i;
-                    System.out.println("Input " + input +" resulted in output " + returnValue);
-
                     breakLoop = true;
                 }
             }
