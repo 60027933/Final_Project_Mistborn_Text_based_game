@@ -270,12 +270,18 @@ class textGame {
             case 31:
                 for(int i = 0; i < days31.size(); i++){
                     if(months[time.day].equals(days31.get(i))){
-                        time.month++;
-                        time.day = 1;
+                        if(time.month == 11) { // december, last month of year
+                            time.month = 0;
+                            time.day = 1;
+                            time.year += 1;
+                        }
+                        else{
+                            time.month++;
+                            time.day = 1;
+                        }
                     }
                 }
         }
-        //if the month is flipped to january, flip the year as well
         return time;
     }
 }
