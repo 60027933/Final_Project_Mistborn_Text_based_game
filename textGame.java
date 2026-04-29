@@ -101,7 +101,7 @@ class textGame {
         regularTurn(s, player);
         //then, recursively call itself until the final event in (assume it's like year three or something)
         if(player.time.year < 3) {
-            gameTurn(player, s);
+            player = gameTurn(player, s);
         }
         return player;
     }
@@ -119,7 +119,7 @@ class textGame {
             player.health = explore(player.health);
         }
         if(turn == turnOptions.TRAVEL) {
-            player.location = travel(player);
+            player.location = travel(player,s);
         }
         if(turn == turnOptions.STATUS) {
             status(player);
@@ -149,9 +149,24 @@ class textGame {
         return optionPicked;
     }
     
-    public static areas travel(player player){
+    public static areas travel(player player, Scanner s){
         //give map, get travel option, add days according to distance, and then 
         // SO FIRST WE WILL JUST ASSUME THAT ALL AREAS in AREAS enum are next to each other, and therefore travellable to
+        // except the current location
+        ArrayList<String> locations = new ArrayList<String>();
+        for(areas a : areas.values()){
+            if(a != player.location){
+                // it is travelable to
+                locations.add(a.name());
+            }
+        }
+        String[] locationsArray = locations.toArray(new String[0]);
+
+        int optionPicked = options(s,"Locations: ", locationsArray);
+
+        // interpret this value now
+        //Or print it for now I guess
+        System.out.println("You chose " + optionPicked + ". This probably corrosponds to this location: " + areas.values()[optionPicked]);
         return player.location;
     }
     public static int sleep(int health){
