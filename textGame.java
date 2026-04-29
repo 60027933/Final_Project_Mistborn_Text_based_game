@@ -32,14 +32,25 @@ class textGame {
             this.day = day;
         }
     }
+    static class player {
+        int health;
+        calandar time;
+        areas location;
+        public player(int health, calandar time, areas location){
+            this.health = health;
+            this.time = time;
+            this.location = location;
+        }
+    }
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         calandar time = new calandar(0,0,0);
-
         int health = 100;
+        areas location = areas.TRESTING;
+        
+        player player = new player(health,time,location);
         
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
-        areas location = areas.TRESTING;
 
         /*if(checkPlayerUnderstanding(s)){
             beginStory(s);
@@ -55,7 +66,7 @@ class textGame {
 
         }
         */ // FOR QUICKER TESTS:
-        gameTurn(time, s, health);
+        player = gameTurn(player, s);
         s.close();
     }
     public static boolean checkPlayerUnderstanding(Scanner s){
@@ -81,39 +92,40 @@ class textGame {
         printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
         wait(s);
     }
-    public static void gameTurn(calandar time, Scanner s, int health){
-        time = addDay(time, 1);
-        printDate(time);
+    public static player gameTurn(player player, Scanner s){
+        player.time = addDay(player.time, 1);
+        printDate(player.time);
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
-        regularTurn(s, health, time);
+        regularTurn(s, player);
         //then, recursively call itself until the final event in (assume it's like year three or something)
-        if(time.year < 3) {
-            gameTurn(time, s, health);
+        if(player.time.year < 3) {
+            gameTurn(player, s);
         }
+        return player;
     }
     public static void clear(){
         // clear the screen.
     }
-    public static void regularTurn(Scanner s, int health, calandar time){
+    public static player regularTurn(Scanner s, player player){
         // give options to player,
         // travel, sleep, explore
         turnOptions turn = giveTurnOptions(s);
         if(turn == turnOptions.SLEEP) {
-            health = sleep(health);
+            player.health = sleep(player.health);
         }
         if(turn == turnOptions.EXPLORE){
-            health = explore(health);
+            player.health = explore(player.health);
         }
         if(turn == turnOptions.TRAVEL) {
-            travel();
+            player.location = travel(player);
         }
         if(turn == turnOptions.STATUS) {
-            status(health, time);
-            regularTurn(s,health,time);
+            status(player);
+            player = regularTurn(s,player);
         }
-        
+        return player;
     }
 
     public static turnOptions giveTurnOptions(Scanner s){ // REGULAR TURN
@@ -137,8 +149,10 @@ class textGame {
         return optionPicked;
     }
     
-    public static void travel(){
+    public static areas travel(player player){
         //give map, get travel option, add days according to distance, and then 
+        // SO FIRST WE WILL JUST ASSUME THAT ALL AREAS in AREAS enum are next to each other, and therefore travellable to
+        return player.location;
     }
     public static int sleep(int health){
         // So the player sleeps, a day passes, and you gain health.
@@ -149,10 +163,10 @@ class textGame {
         
         return health;
     }
-    public static void status(int health, calandar time){
+    public static void status(player player){
         printS("Today is: ");
-        printDate(time);
-        printS("Your health is: \n" + health + "\n");
+        printDate(player.time);
+        printS("Your health is: \n" + player.health + "\n");
     }
 
     public static String getInput(Scanner s){
