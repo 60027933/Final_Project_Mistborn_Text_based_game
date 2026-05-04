@@ -101,6 +101,7 @@ class textGame {
         regularTurn(s, player);
         //then, recursively call itself until the final event in (assume it's like year three or something)
         if(player.time.year < 3) {
+            wait(s);
             player = gameTurn(player, s);
         }
         return player;
@@ -119,7 +120,7 @@ class textGame {
             player.health = explore(player.health);
         }
         if(turn == turnOptions.TRAVEL) {
-            player.location = travel(player,s);
+            player = travel(player,s);
         }
         if(turn == turnOptions.STATUS) {
             status(player);
@@ -149,25 +150,54 @@ class textGame {
         return optionPicked;
     }
     
-    public static areas travel(player player, Scanner s){
+    public static player travel(player player, Scanner s){
         //give map, get travel option, add days according to distance, and then 
         // SO FIRST WE WILL JUST ASSUME THAT ALL AREAS in AREAS enum are next to each other, and therefore travellable to
         // except the current location
+        int playerLocationInAreas = 100; // default value: something so high that it will never trigger the adding 1
+
         ArrayList<String> locations = new ArrayList<String>();
+        int i = -1; //  counter starts at -1 to offset initial adding
         for(areas a : areas.values()){
+            i++;
             if(a != player.location){
                 // it is travelable to
                 locations.add(a.name());
+            }else{
+                printS("You are currently at " + areas.values()[i] + "\n");
+                playerLocationInAreas = i;
             }
         }
         String[] locationsArray = locations.toArray(new String[0]);
 
-        int optionPicked = options(s,"Locations: ", locationsArray);
-
-        // interpret this value now
-        //Or print it for now I guess
-        System.out.println("You chose " + optionPicked + ". This probably corrosponds to this location: " + areas.values()[optionPicked]);
-        return player.location;
+        int optionPicked = options(s,"Travel Locations: ", locationsArray);
+        // so if the optionsPicked number is greater then or equal to the player.location in areas.values()[], add 1
+        if(optionPicked >= playerLocationInAreas) optionPicked++;
+        printS("Your input likely corrosponds to this location: " + areas.values()[optionPicked] + "\n");
+        
+        if(areas.values()[optionPicked].name().toLowerCase().equals("hathsin")){
+            boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No");
+            if(willing){
+                player.location = areas.values()[optionPicked];
+                player.time = addDay(player.time,7);
+                System.out.println("Traveling takes 1 week.");
+            }
+            else{
+                printS("As you debate this, you realize that your day is spent.");
+            }
+        }
+        else{
+            boolean willing = option(s,"Are you willing?","Yes","No");
+            if(willing){
+                player.location = areas.values()[optionPicked];
+                player.time = addDay(player.time,7);
+                System.out.println("Traveling takes 1 week.");
+            }
+            else{
+                printS("As you debate this, you realize that your day is spent.");
+            }
+        }
+        return player;
     }
     public static int sleep(int health){
         // So the player sleeps, a day passes, and you gain health.
