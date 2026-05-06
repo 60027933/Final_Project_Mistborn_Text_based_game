@@ -3,7 +3,7 @@ package src;
 import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
 
-import src.Events.util.*;
+import src.Events.*;
 
 // enum inventory objs;
 class textGame {
