@@ -1,6 +1,9 @@
+package src;
 // Import the ArrayList class
 import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
+
+import src.Events.util.*;
 
 // enum inventory objs;
 class textGame {
@@ -32,6 +35,7 @@ class textGame {
             this.day = day;
         }
     }
+
     static class player {
         int health;
         calandar time;
@@ -41,7 +45,9 @@ class textGame {
             this.time = time;
             this.location = location;
         }
+        
     }
+    
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         calandar time = new calandar(0,0,0);
