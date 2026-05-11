@@ -84,6 +84,7 @@ class textGame {
             if(!spoilers) System.out.println("Go read Mistborn it good. This game can wait fr"); returnValue = false;
             if(!understanding && spoilers) {
                 printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
+                printS("\nIn Mistborn, 1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people he now ruled under were split into two classes based off whether they supported him in his conquering: The Skaa, or slaves, which did not; and the Nobility, who did.");
                 System.out.println("");
             
             }   
@@ -93,9 +94,9 @@ class textGame {
         return returnValue;
     }
     public static void beginStory(Scanner s){
-        printS("\nYou are a skaa working the fields in the Tresting Plantation. You decide to escape after the plantation is burned.");
+        printS("\nYou are a skaa assigned to work the fields in the Tresting Plantation. \nA strange man in a strange cloak showed up yesterday, and this morning the manor is burning. \nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors found the burned manor and dead nobility, they will assume the skaa were responsible.");
         pause();
-        printS("\nYou choose not to go which the other skaa, but rather to set out on your own in search of a better life. You have a sickly build.");
+        printS("\nYou choose not to go which the other skaa in hiding, but rather to set out on your own in search of a better life.");
         wait(s);
     }
     public static player gameTurn(player player, Scanner s){
@@ -123,7 +124,7 @@ class textGame {
             player.health = sleep(player.health);
         }
         if(turn == turnOptions.EXPLORE){
-            player.health = explore(player.health);
+            player = explore(player,s);
         }
         if(turn == turnOptions.TRAVEL) {
             player = travel(player,s);
@@ -210,9 +211,9 @@ class textGame {
         printS("You sleep, regaining some health. Health is now 100\n");
         return health = 100; // change so that it can dynamically change?
     }
-    public static int explore(int health){
+    public static player explore(player player, Scanner s){
         
-        return health;
+        return player;
     }
     public static void status(player player){
         printS("Today is: ");
@@ -274,6 +275,11 @@ class textGame {
             }
         }
         return returnValue; // 
+    }
+
+    public static player battle(player player){
+        
+        return player;
     }
 
     public static void printS(String text){
