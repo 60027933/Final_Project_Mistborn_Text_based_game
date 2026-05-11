@@ -45,6 +45,10 @@ class textGame {
             this.time = time;
             this.location = location;
         }
+        public areaEvent pickEvent(){
+            areaEvent returnValue = new areEvent(event.ENEMY,)
+
+        }
         
     }
     
@@ -94,7 +98,7 @@ class textGame {
         return returnValue;
     }
     public static void beginStory(Scanner s){
-        printS("\nYou are a skaa assigned to work the fields in the Tresting Plantation. \nA strange man in a strange cloak showed up yesterday, and this morning the manor is burning. \nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors found the burned manor and dead nobility, they will assume the skaa were responsible.");
+        printS("\nYou are a skaa assigned to work the fields in the Tresting Plantation. \nA strange man in a strange cloak showed up yesterday, and this morning the manor is burning. \nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors find the burned manor and dead nobility, they will assume the skaa were responsible.");
         pause();
         printS("\nYou choose not to go which the other skaa in hiding, but rather to set out on your own in search of a better life.");
         wait(s);
@@ -209,7 +213,7 @@ class textGame {
     public static int sleep(int health){
         // So the player sleeps, a day passes, and you gain health.
         printS("You sleep, regaining some health. Health is now 100\n");
-        return health = 100; // change so that it can dynamically change?
+        return health = 100; // change this so that it can dynamically change?
     }
     public static player explore(player player, Scanner s){
         
