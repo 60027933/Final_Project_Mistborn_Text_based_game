@@ -40,14 +40,16 @@ class textGame {
         int health;
         calandar time;
         areas location;
-        public player(int health, calandar time, areas location){
+        int dmg;
+        public player(int health, calandar time, areas location, int dmg){
             this.health = health;
             this.time = time;
             this.location = location;
+            this.dmg = dmg;
         }
         public areaEvent pickEvent(){
-            areaEvent returnValue = new areEvent(event.ENEMY,)
-
+            areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, "Yo a skaa bandit for real approaches you",areaEvent.enemies.SKAA_BANDIT);
+            return returnValue;
         }
         
     }
@@ -57,14 +59,14 @@ class textGame {
         calandar time = new calandar(0,0,0);
         int health = 100;
         areas location = areas.TRESTING;
-        
-        player player = new player(health,time,location);
+        int dmg = 5;
+        player player = new player(health,time,location,dmg);
         
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
 
-        /*if(checkPlayerUnderstanding(s)){
+        if(checkPlayerUnderstanding(s)){
             beginStory(s);
-            gameTurn(time,s,health);
+            player = gameTurn(player,s);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
 
@@ -75,8 +77,8 @@ class textGame {
         //each location needs a certain number of related 'filler' events
 
         }
-        */ // FOR QUICKER TESTS:
-        player = gameTurn(player, s);
+         // FOR QUICKER TESTS:
+        // player = gameTurn(player, s);
         s.close();
     }
     public static boolean checkPlayerUnderstanding(Scanner s){
@@ -85,7 +87,7 @@ class textGame {
         boolean understanding = option(s, "Have you read mistborn?", "Yes","No");
         if(!understanding){
             boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
-            if(!spoilers) System.out.println("Go read Mistborn it good. This game can wait fr"); returnValue = false;
+            if(!spoilers) printS("\nGo read Mistborn. It's a fantastic book. This game can wait fr"); returnValue = false;
             if(!understanding && spoilers) {
                 printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
                 printS("\nIn Mistborn, 1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people he now ruled under were split into two classes based off whether they supported him in his conquering: The Skaa, or slaves, which did not; and the Nobility, who did.");
