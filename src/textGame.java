@@ -41,6 +41,7 @@ class textGame {
         calandar time;
         areas location;
         int dmg;
+
         public player(int health, calandar time, areas location, int dmg){
             this.health = health;
             this.time = time;
@@ -48,7 +49,9 @@ class textGame {
             this.dmg = dmg;
         }
         public areaEvent pickEvent(){
-            areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, "Yo a skaa bandit for real approaches you",areaEvent.enemies.SKAA_BANDIT);
+            areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, 
+                "Yo a skaa bandit for real approaches you",
+                areaEvent.enemies.SKAA_BANDIT);
             return returnValue;
         }
         
@@ -218,7 +221,8 @@ class textGame {
         return health = 100; // change this so that it can dynamically change?
     }
     public static player explore(player player, Scanner s){
-        
+        areaEvent exploreEvent = player.pickEvent(); // eventType, description, enemies
+        if(exploreEvent.eventType == areaEvent.event.ENEMY) player = battle(player,exploreEvent,s);
         return player;
     }
     public static void status(player player){
@@ -226,7 +230,11 @@ class textGame {
         printDate(player.time);
         printS("Your health is: \n" + player.health + "\n");
     }
-
+    public static player battle(player player, areaEvent battle, Scanner s){
+        printS(battle.description);
+        wait(s);
+        return player;
+    }
     public static String getInput(Scanner s){
         String stringInput = s.nextLine();
         return stringInput;
@@ -283,10 +291,7 @@ class textGame {
         return returnValue; // 
     }
 
-    public static player battle(player player){
-        
-        return player;
-    }
+
 
     public static void printS(String text){
         //print slow

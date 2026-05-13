@@ -2,13 +2,13 @@ package src.Events;
 
 
 public class areaEvent {
-    public enum event {
+    public static enum event {
         ENEMY,
         INFO,
         INVENTORY,
         QUEST
     }
-    public enum enemies {
+    public static enum enemies {
         IMMATURE_KOLOSS,
         CLERGY_SCOUT,
         MATURE_KOLOSS,
@@ -22,9 +22,9 @@ public class areaEvent {
     //event types:
     // enemy / inventory / information / quest (enum?)
     // hold of on quest and inventory for now
-    event eventType;
-    String description;
-    enemies enemies;
+    public event eventType;
+    public String description;
+    public enemies enemies;
     public areaEvent(event eventType, String description, enemies enemies){
         this.eventType = eventType;
         this.description = description;
