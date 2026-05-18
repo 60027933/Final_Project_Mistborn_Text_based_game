@@ -50,8 +50,7 @@ class textGame {
         }
         public areaEvent pickEvent(){
             areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, 
-                "Yo a skaa bandit for real approaches you",
-                areaEvent.enemies.SKAA_BANDIT);
+                "Yo a skaa bandit for real approaches you");
             return returnValue;
         }
         
@@ -232,7 +231,9 @@ class textGame {
     }
     public static player battle(player player, areaEvent battle, Scanner s){
         printS(battle.description);
-        wait(s);
+        printS("\n(There will be a proper battle system in the future)\n");
+        printS("You Fight the " + battle.enemies.name() + " And lose " + battle.healthOfEnemy(battle.enemies) + " Health.");
+        player.health -= battle.healthOfEnemy(battle.enemies);
         return player;
     }
     public static String getInput(Scanner s){

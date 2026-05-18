@@ -2,13 +2,13 @@ package src.Events;
 
 
 public class areaEvent {
-    public static enum event {
+    public enum event {
         ENEMY,
         INFO,
         INVENTORY,
         QUEST
     }
-    public static enum enemies {
+    public enum enemies {
         IMMATURE_KOLOSS,
         CLERGY_SCOUT,
         MATURE_KOLOSS,
@@ -25,10 +25,13 @@ public class areaEvent {
     public event eventType;
     public String description;
     public enemies enemies;
-    public areaEvent(event eventType, String description, enemies enemies){
+    public areaEvent(event eventType, String description){
         this.eventType = eventType;
-        this.description = description;
-        this.enemies = enemies;
+        this.enemies = pickEnemyFromLocation();
+        this.description = description; // so after this, we should change the description to be based off of the enemy fr
+    }
+    public enemies pickEnemyFromLocation(){
+        return enemies.SKAA_BANDIT;
     }
     public int healthOfEnemy(enemies enemy){
         int health = 0;
