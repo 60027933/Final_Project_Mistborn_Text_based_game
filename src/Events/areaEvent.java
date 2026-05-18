@@ -24,10 +24,10 @@ public class areaEvent {
     // hold of on quest and inventory for now
     public event eventType;
     public String description;
-    public enemies enemies;
+    public enemies enemy;
     public areaEvent(event eventType, String description){
         this.eventType = eventType;
-        this.enemies = pickEnemyFromLocation();
+        this.enemy = pickEnemyFromLocation();
         this.description = description; // so after this, we should change the description to be based off of the enemy fr
     }
     public enemies pickEnemyFromLocation(){

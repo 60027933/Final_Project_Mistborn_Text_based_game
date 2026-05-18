@@ -50,7 +50,7 @@ class textGame {
         }
         public areaEvent pickEvent(){
             areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, 
-                "Yo a skaa bandit for real approaches you");
+                "A skaa bandit approaches you!");
             return returnValue;
         }
         
@@ -92,9 +92,11 @@ class textGame {
             if(!spoilers) printS("\nGo read Mistborn. It's a fantastic book. This game can wait fr"); returnValue = false;
             if(!understanding && spoilers) {
                 printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
+                pause();pause();
+
                 printS("\nIn Mistborn, 1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people he now ruled under were split into two classes based off whether they supported him in his conquering: The Skaa, or slaves, which did not; and the Nobility, who did.");
-                System.out.println("");
-            
+                printS("\nEverything else you need to know should be explained in-game as it happens");
+                returnValue = true;
             }   
         }
         else printS("\nGood, because there are spoilers in this game.");
@@ -102,7 +104,11 @@ class textGame {
         return returnValue;
     }
     public static void beginStory(Scanner s){
-        printS("\nYou are a skaa assigned to work the fields in the Tresting Plantation. \nA strange man in a strange cloak showed up yesterday, and this morning the manor is burning. \nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors find the burned manor and dead nobility, they will assume the skaa were responsible.");
+        printS("\n\n\nYou are a skaa assigned to work the fields in the Tresting Plantation.");
+        pause();
+        printS("\nA strange man in a strange cloak showed up yesterday who called himself Kelsier, the survivor of Hathsin. And this morning the manor is burning.");
+        pause();
+        printS("\nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors find the burned manor and dead nobility, they will assume the skaa were responsible.");
         pause();
         printS("\nYou choose not to go which the other skaa in hiding, but rather to set out on your own in search of a better life.");
         wait(s);
@@ -217,6 +223,7 @@ class textGame {
     public static int sleep(int health){
         // So the player sleeps, a day passes, and you gain health.
         printS("You sleep, regaining some health. Health is now 100\n");
+        pause();
         return health = 100; // change this so that it can dynamically change?
     }
     public static player explore(player player, Scanner s){
@@ -227,13 +234,15 @@ class textGame {
     public static void status(player player){
         printS("Today is: ");
         printDate(player.time);
+        pause();
         printS("Your health is: \n" + player.health + "\n");
     }
     public static player battle(player player, areaEvent battle, Scanner s){
-        printS(battle.description);
+        printS("\n"+battle.description);
         printS("\n(There will be a proper battle system in the future)\n");
-        printS("You Fight the " + battle.enemies.name() + " And lose " + battle.healthOfEnemy(battle.enemies) + " Health.");
-        player.health -= battle.healthOfEnemy(battle.enemies);
+        pause();
+        printS("You Fight the " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy) + " Health.");
+        player.health -= battle.healthOfEnemy(battle.enemy);
         return player;
     }
     public static String getInput(Scanner s){
