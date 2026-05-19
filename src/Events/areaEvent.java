@@ -57,4 +57,28 @@ public class areaEvent {
         }
         return health;
     }
+    public int currencyHeldOnEnemy(enemies enemy){
+        int boxings = 0;
+        switch(enemy){
+            case IMMATURE_KOLOSS:
+                boxings = 20;
+                break;
+            case MATURE_KOLOSS:
+                boxings = 150;
+                break;
+            case CLERGY_SCOUT:
+                boxings = 20;
+                break;
+            case TINEYE_CLERGY:
+                boxings = 50;
+                break;
+            case STEEL_INQUISITOR:
+                boxings = 250;
+                break;
+            case SKAA_BANDIT:
+                boxings = 5;
+                break; 
+        }
+        return boxings;
+    }
 }
