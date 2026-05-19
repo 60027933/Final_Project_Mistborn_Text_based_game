@@ -41,12 +41,13 @@ class textGame {
         calandar time;
         areas location;
         int dmg;
-
-        public player(int health, calandar time, areas location, int dmg){
+        int currency;
+        public player(int health, calandar time, areas location, int dmg, int currency){
             this.health = health;
             this.time = time;
             this.location = location;
             this.dmg = dmg;
+            this.currency = currency;
         }
         public areaEvent pickEvent(){
             areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, 
@@ -62,7 +63,8 @@ class textGame {
         int health = 100;
         areas location = areas.TRESTING;
         int dmg = 5;
-        player player = new player(health,time,location,dmg);
+        int currency = 0;
+        player player = new player(health,time,location,dmg,currency);
         
         ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
 
@@ -200,7 +202,7 @@ class textGame {
             boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No");
             if(willing){
                 player.location = areas.values()[optionPicked];
-                player.time = addDay(player.time,7);
+                player.time = addDay(player.time,6);
                 System.out.println("Traveling takes 1 week.");
             }
             else{
@@ -211,7 +213,7 @@ class textGame {
             boolean willing = option(s,"Are you willing?","Yes","No");
             if(willing){
                 player.location = areas.values()[optionPicked];
-                player.time = addDay(player.time,7);
+                player.time = addDay(player.time,6);
                 System.out.println("Traveling takes 1 week.");
             }
             else{
@@ -341,41 +343,45 @@ class textGame {
         ArrayList<String> days30 = new ArrayList<String>();
         days30.add("April"); days30.add("June"); days30.add("September"); days30.add("November");
         // So keep track of days of the month, flip months accordingly
-        time.day += 1;
-        // february first
-        switch(time.day){
-            case 28:
-                if(time.month == 1){
-                    time.day = 1;
-                    time.month++;
-                     // february
-                }
-                break;
-            case 30:
-                for(int i = 0; i < days30.size(); i++){
-                    if(months[time.day].equals(days30.get(i))){
-                        time.month++;
+        for(int k = 0; k < add; k++){
+            time.day += 1;
+            // february first
+            switch(time.day){
+                case 28:
+                    if(time.month == 1){
                         time.day = 1;
+                        time.month++;
+                        // february
                     }
-                }
-                break;
-            case 31:
-                for(int i = 0; i < days31.size(); i++){
-                    if(months[time.day].equals(days31.get(i))){
-                        if(time.month == 11) { // december, last month of year
-                            time.month = 0;
-                            time.day = 1;
-                            time.year += 1;
-                        }
-                        else{
+                    break;
+                case 30:
+                    for(int i = 0; i < days30.size(); i++){
+                        if(months[time.month].equals(days30.get(i))){
                             time.month++;
                             time.day = 1;
                         }
                     }
-                }
+                    break;
+                case 31:
+                    for(int i = 0; i < days31.size(); i++){
+                        if(months[time.month].equals(days31.get(i))){
+                            if(time.month == 11) { // december, last month of year
+                                time.month = 0;
+                                time.day = 1;
+                                time.year += 1;
+                            }
+                            else{
+                                time.month++;
+                                time.day = 1;
+                            }
+                        }
+                    }
+                    break;
+            }
         }
         return time;
     }
+    
 }
 
 
