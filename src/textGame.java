@@ -245,6 +245,8 @@ class textGame {
         pause();
         printS("You Fight the " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy) + " Health.");
         player.health -= battle.healthOfEnemy(battle.enemy);
+        printS("\nYou gain 5 Boxings (currency)");
+        player.currency += 5;
         return player;
     }
     public static String getInput(Scanner s){
