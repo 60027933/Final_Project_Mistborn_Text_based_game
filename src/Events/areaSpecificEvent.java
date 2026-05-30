@@ -38,6 +38,14 @@ public class areaSpecificEvent {
                 };
                 break;
             case FELLIS:
+                switch(enemy){
+                    case NOBLE_GUARD:
+                        break;
+                    case TINEYE_CLERGY:
+                        break;
+                    case CLERGY_SCOUT:
+                        break;
+                }
                 break;
             case TRESTING:
                 break;

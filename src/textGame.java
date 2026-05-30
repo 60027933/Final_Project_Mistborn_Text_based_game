@@ -215,7 +215,7 @@ class textGame {
         printAddons.printS("Your health is: \n" + player.health + "\n");
     }
     public static player battle(player player, areaSpecificEvent battle, Scanner s){
-        printAddons.printS("\n"+battle.description.replace(". ",".\n"));
+        printAddons.printS("\n"+battle.description);
         printAddons.printS("\n(There will be a proper battle system in the future)\n");
         printAddons.pause();
         printAddons.printS("You Fight the " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy) + " Health.");
