@@ -67,7 +67,7 @@ class textGame {
             boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
             if(!spoilers) printAddons.printS("\nGo read Mistborn. It's a fantastic book. This game can printAddons.wait fr"); returnValue = false;
             if(!understanding && spoilers) {
-                printAddons.printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books.\nThe first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of \nThe Final Empire, The Well of Ascension, and The Hero of Ages.");
+                printAddons.printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books. The first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of The Final Empire, The Well of Ascension, and The Hero of Ages.");
                 printAddons.pause();printAddons.pause();
 
                 printAddons.printS("\nIn Mistborn, 1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people he now ruled under were split into two classes based off whether they supported him in his conquering: The Skaa, or slaves, which did not; and the Nobility, who did.");
