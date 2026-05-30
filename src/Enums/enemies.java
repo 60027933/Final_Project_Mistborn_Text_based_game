@@ -7,4 +7,5 @@ public enum enemies {
     TINEYE_CLERGY,
     STEEL_INQUISITOR,
     SKAA_BANDIT,
+    NOBLE_GUARD
 }
