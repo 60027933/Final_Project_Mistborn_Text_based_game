@@ -1,5 +1,6 @@
 package src.Events;
 
+import src.Enums.*;
 
 public class areaEvent {
     public enum event {

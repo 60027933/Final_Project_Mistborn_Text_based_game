@@ -4,7 +4,7 @@ import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
 
 import src.Events.*;
-
+import src.Enums.*;
 // enum inventory objs;
 class textGame {
     //ENUMS:
@@ -19,14 +19,7 @@ class textGame {
         EXPLORE,
         STATUS
     }
-    enum areas {
-        // CENTRAL DOMINANCE:
-        LUTHADEL, // culteral and political center of final empire. Major nobles have keeps there. "City of a thousand spires"
-        FELLIS, // prosperous, clean suburban city near luthadel, for nobles who do not wish to live in luthadel
-        TRESTING, // skaa plantation. burned to the ground at the start of the series.
-        HATHSIN // pits of hathsin, skaa labour camp where only one person has survived (kelsier).
-        //'skaa climb down suffocatingly narrow gorges and reach into crystal-lines niches to find geodes that contain atium.'
-    }
+    
     static class calandar {
         int year, month, day;
         public calandar(int year, int month, int day){
@@ -73,7 +66,6 @@ class textGame {
             player = gameTurn(player,s);
         // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
         // no knowledge of allomancy or anything; as you encounter it it will be explained.
-
         //enum list inventory dynamic array?
         //from inventory array: select weapon, store that in variable
 
@@ -203,7 +195,7 @@ class textGame {
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time = addDay(player.time,6);
-                System.out.println("Traveling takes 1 week.");
+                printS("\nTraveling takes 1 week.");
             }
             else{
                 printS("As you debate this, you realize that your day is spent.");
@@ -214,7 +206,7 @@ class textGame {
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time = addDay(player.time,6);
-                System.out.println("Traveling takes 1 week.");
+                printS("\nTraveling takes 1 week.");
             }
             else{
                 printS("As you debate this, you realize that your day is spent.");
