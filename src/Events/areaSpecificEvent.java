@@ -43,8 +43,10 @@ public class areaSpecificEvent {
             case FELLIS:
                 switch(enemy){
                     case NOBLE_GUARD:
+                        options.add("You wander down the quiet streets of Fellis, and pass a carriage. A noble woman in a frilly dress saw you pass, gasped, and said 'It's a SKAA! Get rid of it!' to the guard in the backseat. The guard begrudginly complied. After opening the carriage door, he stepped outside gingerly before calling out 'Stop!'");
                         break;
                     case TINEYE_CLERGY:
+                        options.add("As you pass through the quiet streets and quaint shops of Fellis, looking for a bite to eat, you see an obligator walking slowly towards you with a hateful expression on his face. You shout in surprise, causing him to put his hands over his ears - a tineye's reaction.");
                         break;
                     case CLERGY_SCOUT:
                         break;
@@ -53,6 +55,7 @@ public class areaSpecificEvent {
             case TRESTING:
                 switch(enemy){
                     case SKAA_BANDIT:
+                        options.add("As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, formerly enslaved, approach you with a knife. He demands roughly for everything you have.");
                         break;
                     case CLERGY_SCOUT:
                         break;
