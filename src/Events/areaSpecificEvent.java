@@ -28,12 +28,15 @@ public class areaSpecificEvent {
                 switch(enemy){
                     case SKAA_BANDIT:
                         options.add("You walk through the grimy, ashen streets of cobblestone Skaa slums. The streets are compact, lined with multi-story hovels and tenaments with only the occasional boarded-up window. The streets are filled with beggars and the sick, and you hear coughing ring out as you pass an alley. You decide to head back, but before you do, someone taps on your shoulder. You swivel around, and come face to face with a Skaa Bandit!");
+                        options.add("You decided to nap in an alley surrounded by skaa thieves. They watch you hungrily as you push your way into the bandit-filled alleyway, kick a bandit to make room on the floor, lie down, and close your eyes. For some reason, one of the bandits approaches you!");
                         break;
                     case TINEYE_CLERGY:
                         options.add("You walk along the main River running through Luthadel, only to realize you've wandered into the Canton of Inquisition. You promtly turn aroun, knowing you may attract attention, but it's too late; a Clergy Tineye perched on one of the many spires of Luthadel has spotted you, and is now curiously approaching you.");
+                        options.add("You find a tineye as you are exploring abandoned buildings. He wears the signature clothes of the clergy; You shout loudly, causing him to clap his hands on his ears. For some reason, he seems angry.");
                         break;
                     case CLERGY_SCOUT:
                         options.add("You are passed by the occasional horse and wagon as you walk through the clean stone streets of Luthadel's Commercial District. You pass bakeries filling the air with delicious smells, and hear the workers at the woodshop cutting, hammering, and working on the various woodworks to be put up for sale. As you pass yet another carriage, you realize that you are being followed. Parhaps being a ash-covered skaa has attracted the attention of this Clergy Scout, who was watching the main street in an alley. You turn to face him.");
+                        options.add("You climb the walls of luthadel using the stairs. At the very top, a clergy scout is nodding off. You push him into the river. He coughs and sputters, and you realize he cannot swim. As he shouts, a guard comes to rescue him. He approaches you sopping wet and for some reason, angry. 'It's Just a prank, bro,' you tell him. He pulls out a knife.");
                         break;
                 };
                 break;
@@ -48,9 +51,24 @@ public class areaSpecificEvent {
                 }
                 break;
             case TRESTING:
+                switch(enemy){
+                    case SKAA_BANDIT:
+                        break;
+                    case CLERGY_SCOUT:
+                        break;
+                }
                 break;
             case HATHSIN:
+                switch(enemy){
+                case STEEL_INQUISITOR:
+                    break;
+                case MATURE_KOLOSS:
+                    break;
+                case IMMATURE_KOLOSS:
+                    break;
+                }
                 break;
+                
         }
 
         if(!options.isEmpty()) {desc = pickOption.fromStrings(options.toArray(new String[0]),r);}

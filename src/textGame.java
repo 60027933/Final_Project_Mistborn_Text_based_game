@@ -213,6 +213,8 @@ class textGame {
         printAddons.printS(player.time.printDate());
         printAddons.pause();
         printAddons.printS("Your health is: \n" + player.health + "\n");
+        printAddons.pause();
+        printAddons.printS("Your munnies you gots in yo purse: " + player.currency + "\n");
     }
     public static player battle(player player, areaSpecificEvent battle, Scanner s){
         printAddons.printS("\n"+battle.description);
