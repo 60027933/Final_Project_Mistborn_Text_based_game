@@ -26,12 +26,13 @@ public class areaEvent {
     public event eventType;
     public String description;
     public enemies enemy;
-    public areaEvent(event eventType, String description){
+    public areaEvent(event eventType, String description, areas area){
         this.eventType = eventType;
-        this.enemy = pickEnemyFromLocation();
+        this.enemy = pickEnemyFromLocation(area);
         this.description = description; // so after this, we should change the description to be based off of the enemy fr
     }
-    public enemies pickEnemyFromLocation(){
+    public enemies pickEnemyFromLocation(areas area){
+        //AREAS: LUTHADEL, 
         return enemies.SKAA_BANDIT;
     }
     public int healthOfEnemy(enemies enemy){

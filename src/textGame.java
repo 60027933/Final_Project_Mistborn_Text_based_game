@@ -1,10 +1,11 @@
 package src;
 // Import the ArrayList class
-import java.nio.channels.InterruptedByTimeoutException;
+//import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
 
 import src.Events.*;
 import src.Enums.*;
+import src.Time.calandar;
 // enum inventory objs;
 class textGame {
     //ENUMS:
@@ -20,21 +21,14 @@ class textGame {
         STATUS
     }
     
-    static class calandar {
-        int year, month, day;
-        public calandar(int year, int month, int day){
-            this.year = year;
-            this.month = month;
-            this.day = day;
-        }
-    }
+
 
     static class player {
-        int health;
-        calandar time;
-        areas location;
-        int dmg;
-        int currency;
+        public int health;
+        public calandar time;
+        public areas location;
+        public int dmg;
+        public int currency;
         public player(int health, calandar time, areas location, int dmg, int currency){
             this.health = health;
             this.time = time;
@@ -44,7 +38,7 @@ class textGame {
         }
         public areaEvent pickEvent(){
             areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, 
-                "A skaa bandit approaches you!");
+                "A skaa bandit approaches you!", this.location);
             return returnValue;
         }
         
@@ -59,7 +53,7 @@ class textGame {
         int currency = 0;
         player player = new player(health,time,location,dmg,currency);
         
-        ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
+        //ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
 
         if(checkPlayerUnderstanding(s)){
             beginStory(s);
@@ -108,14 +102,14 @@ class textGame {
         wait(s);
     }
     public static player gameTurn(player player, Scanner s){
-        player.time = addDay(player.time, 1);
-        printDate(player.time);
+        player.time.addDay(1);
+        printS(player.time.printDate());
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
         regularTurn(s, player);
         //then, recursively call itself until the final event in (assume it's like year three or something)
-        if(player.time.year < 3) {
+        if(player.time.getYear() < 3) {
             wait(s);
             player = gameTurn(player, s);
         }
@@ -194,7 +188,7 @@ class textGame {
             boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No");
             if(willing){
                 player.location = areas.values()[optionPicked];
-                player.time = addDay(player.time,6);
+                player.time.addDay(6);
                 printS("\nTraveling takes 1 week.");
             }
             else{
@@ -205,7 +199,7 @@ class textGame {
             boolean willing = option(s,"Are you willing?","Yes","No");
             if(willing){
                 player.location = areas.values()[optionPicked];
-                player.time = addDay(player.time,6);
+                player.time.addDay(6);
                 printS("\nTraveling takes 1 week.");
             }
             else{
@@ -227,7 +221,7 @@ class textGame {
     }
     public static void status(player player){
         printS("Today is: ");
-        printDate(player.time);
+        printS(player.time.printDate());
         pause();
         printS("Your health is: \n" + player.health + "\n");
     }
@@ -325,56 +319,8 @@ class textGame {
         System.out.print("\n(enter)");
         s.nextLine();
     }
-    public static void printDate(calandar time){
-        String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
-        printS(String.format("\n%s %d of year %d\n",months[time.month],time.day,time.year));
-    }
-    public static calandar addDay(calandar time, int add){
-        String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
-        
-        ArrayList<String> days31 = new ArrayList<String>();
-        days31.add("January"); days31.add("March");days31.add("May");days31.add("July"); days31.add("October"); days31.add("December");
-        ArrayList<String> days30 = new ArrayList<String>();
-        days30.add("April"); days30.add("June"); days30.add("September"); days30.add("November");
-        // So keep track of days of the month, flip months accordingly
-        for(int k = 0; k < add; k++){
-            time.day += 1;
-            // february first
-            switch(time.day){
-                case 28:
-                    if(time.month == 1){
-                        time.day = 1;
-                        time.month++;
-                        // february
-                    }
-                    break;
-                case 30:
-                    for(int i = 0; i < days30.size(); i++){
-                        if(months[time.month].equals(days30.get(i))){
-                            time.month++;
-                            time.day = 1;
-                        }
-                    }
-                    break;
-                case 31:
-                    for(int i = 0; i < days31.size(); i++){
-                        if(months[time.month].equals(days31.get(i))){
-                            if(time.month == 11) { // december, last month of year
-                                time.month = 0;
-                                time.day = 1;
-                                time.year += 1;
-                            }
-                            else{
-                                time.month++;
-                                time.day = 1;
-                            }
-                        }
-                    }
-                    break;
-            }
-        }
-        return time;
-    }
+
+
     
 }
 
