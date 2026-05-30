@@ -3,33 +3,25 @@ package src.Events;
 import src.Enums.*;
 
 public class areaEvent {
-    public enum event {
-        ENEMY,
-        INFO,
-        INVENTORY,
-        QUEST
-    }
-    public enum enemies {
-        IMMATURE_KOLOSS,
-        CLERGY_SCOUT,
-        MATURE_KOLOSS,
-        TINEYE_CLERGY,
-        STEEL_INQUISITOR,
-        SKAA_BANDIT,
-    }
+
+
     //so the event needs to hold this info
     //introductory text options in an array ("book text")
 
     //event types:
     // enemy / inventory / information / quest (enum?)
     // hold of on quest and inventory for now
-    public event eventType;
+    public turnEventTypes eventType;
     public String description;
     public enemies enemy;
-    public areaEvent(event eventType, String description, areas area){
+    public areaEvent(turnEventTypes eventType, areas area){
         this.eventType = eventType;
         this.enemy = pickEnemyFromLocation(area);
-        this.description = description; // so after this, we should change the description to be based off of the enemy fr
+        this.description = pickDescriptionFromOtherFactors();
+    }
+    public String pickDescriptionFromOtherFactors(){
+        String desc = "Default event decription";
+        return desc;
     }
     public enemies pickEnemyFromLocation(areas area){
         //AREAS: LUTHADEL, 

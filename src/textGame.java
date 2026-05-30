@@ -8,18 +8,7 @@ import src.Enums.*;
 import src.Time.calandar;
 // enum inventory objs;
 class textGame {
-    //ENUMS:
-    enum turnType {
-        IMMEDIATE, // non area specific, time-based events
-        SPECIAL, // area specific, time-based events
-        REGULAR // area specific, non-time based events
-    }
-    enum turnOptions {
-        TRAVEL,
-        SLEEP,
-        EXPLORE,
-        STATUS
-    }
+
     
 
 
@@ -37,8 +26,7 @@ class textGame {
             this.currency = currency;
         }
         public areaEvent pickEvent(){
-            areaEvent returnValue = new areaEvent(areaEvent.event.ENEMY, 
-                "A skaa bandit approaches you!", this.location);
+            areaEvent returnValue = new areaEvent(turnEventTypes.ENEMY, this.location);
             return returnValue;
         }
         
