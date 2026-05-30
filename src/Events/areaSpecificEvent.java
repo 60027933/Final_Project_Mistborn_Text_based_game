@@ -1,10 +1,9 @@
 package src.Events;
 
 import src.Enums.*;
+import src.Random.*;
 
-public class areaEvent {
-
-
+public class areaSpecificEvent {
     //so the event needs to hold this info
     //introductory text options in an array ("book text")
 
@@ -14,7 +13,7 @@ public class areaEvent {
     public turnEventTypes eventType;
     public String description;
     public enemies enemy;
-    public areaEvent(turnEventTypes eventType, areas area){
+    public areaSpecificEvent(turnEventTypes eventType, areas area){
         this.eventType = eventType;
         this.enemy = pickEnemyFromLocation(area);
         this.description = pickDescriptionFromOtherFactors();
@@ -25,6 +24,10 @@ public class areaEvent {
     }
     public enemies pickEnemyFromLocation(areas area){
         //AREAS: LUTHADEL, 
+        switch(area){
+            case LUTHADEL:
+                
+        }
         return enemies.SKAA_BANDIT;
     }
     public int healthOfEnemy(enemies enemy){
