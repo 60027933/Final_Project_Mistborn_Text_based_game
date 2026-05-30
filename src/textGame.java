@@ -65,7 +65,7 @@ class textGame {
         boolean understanding = option(s, "Have you read mistborn?", "Yes","No");
         if(!understanding){
             boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
-            if(!spoilers) printAddons.printS("\nGo read Mistborn. It's a fantastic book. This game can printAddons.wait fr"); returnValue = false;
+            if(!spoilers){ printAddons.printS("\nGo read Mistborn. It's a fantastic book. This game can wait fr"); returnValue = false;}
             if(!understanding && spoilers) {
                 printAddons.printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books. The first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of The Final Empire, The Well of Ascension, and The Hero of Ages.");
                 printAddons.pause();printAddons.pause();
@@ -73,7 +73,6 @@ class textGame {
                 printAddons.printS("\nIn Mistborn, 1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people he now ruled under were split into two classes based off whether they supported him in his conquering: The Skaa, or slaves, which did not; and the Nobility, who did.");
                 printAddons.printS("\nEverything else you need to know should be explained in-game as it happens");
                 printAddons.wait(s);
-                returnValue = true;
             }   
         }
         else printAddons.printS("\nGood, because there are spoilers in this game.");
@@ -92,7 +91,7 @@ class textGame {
     }
     public static player gameTurn(player player, Scanner s){
         player.time.addDay(1);
-        printAddons.printS(player.time.printDate());
+        printAddons.printS("\n"+player.time.printDate());
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
@@ -209,8 +208,9 @@ class textGame {
         return player;
     }
     public static void status(player player){
-        printAddons.printS("Today is: ");
-        printAddons.printS(player.time.printDate());
+        printAddons.printS("\nYou are at " + player.location.name());
+        printAddons.pause();
+        printAddons.printS("\nToday is: " + player.time.printDate());
         printAddons.pause();
         printAddons.printS("Your health is: \n" + player.health + "\n");
         printAddons.pause();
@@ -281,13 +281,6 @@ class textGame {
         }
         return returnValue; // 
     }
-
-
-
-
-
-
-    
 }
 
 
