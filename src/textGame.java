@@ -204,7 +204,7 @@ class textGame {
     }
     public static player explore(player player, Scanner s){
         areaEvent exploreEvent = player.pickEvent(); // eventType, description, enemies
-        if(exploreEvent.eventType == areaEvent.event.ENEMY) player = battle(player,exploreEvent,s);
+        if(exploreEvent.eventType == turnEventTypes.ENEMY) player = battle(player,exploreEvent,s);
         return player;
     }
     public static void status(player player){
