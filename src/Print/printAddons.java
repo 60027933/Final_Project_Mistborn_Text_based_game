@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class printAddons {
     public static void printS(String text){
         //print slow
+        text = wordWrap(text, 150);
         for(int i = 0; i < text.length(); i++){
             try{
                 System.out.print(text.charAt(i));
@@ -29,4 +30,22 @@ public class printAddons {
         System.out.print("\n(hit enter to continue)");
         s.nextLine();
     }
+    public static String wordWrap(String text, int maxWidth) {
+        StringBuilder result = new StringBuilder();
+        String[] words = text.split(" ");
+        int lineLength = 0;
+
+        for (String word : words) {
+            if (lineLength + word.length() + 1 > maxWidth) {
+                result.append("\n");
+                lineLength = 0;
+            } else if (lineLength > 0) {
+                result.append(" ");
+                lineLength++;
+            }
+            result.append(word);
+            lineLength += word.length();
+        }
+        return result.toString();
+}
 }
