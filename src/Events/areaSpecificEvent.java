@@ -1,8 +1,10 @@
 package src.Events;
 
 import src.Enums.*;
-import src.Random.*;
+import src.randomAddons.*;
+
 import java.util.*;
+
 public class areaSpecificEvent {
     //so the event needs to hold this info
     //introductory text options in an array ("book text")
@@ -10,9 +12,11 @@ public class areaSpecificEvent {
     //event types:
     // enemy / inventory / information / quest (enum?)
     // hold of on quest and inventory for now
+    
     public turnEventTypes eventType;
     public String description;
     public enemies enemy;
+    public int enemyCount;
     public areaSpecificEvent(turnEventTypes eventType, areas area){
         this.eventType = eventType;
         this.enemy = pickEnemyFromLocation(area);
@@ -21,41 +25,42 @@ public class areaSpecificEvent {
     public String pickDescriptionFromOtherFactors(areas area,enemies enemy){
         String desc = "Default event decription";
         Random r = new Random();
-        ArrayList<String> options = new ArrayList<>();
+        WeightedRandomCollection<areaSpecificFightDescription> options = new WeightedRandomCollection<>();
 
         switch(area){ // AREA SPECIFIC DESCRIPTION, 
             case LUTHADEL:
                 switch(enemy){
                     case SKAA_BANDIT:
-                        options.add("You walk through the grimy, ashen streets of cobblestone Skaa slums. The streets are compact, lined with multi-story hovels and tenaments with only the occasional boarded-up window. The streets are filled with beggars and the sick, and you hear coughing ring out as you pass an alley. You decide to head back, but before you do, someone taps on your shoulder. You swivel around, and come face to face with a Skaa Bandit!");
-                        options.add("You decided to nap in an alley surrounded by skaa thieves. They watch you hungrily as you push your way into the bandit-filled alleyway, kick a bandit to make room on the floor, lie down, and close your eyes. For some reason, one of the bandits approaches you!");
+                        options.add(50.0, new areaSpecificFightDescription(1,"You approached by a skaa bandit fr"));
+                        options.add(70.0, new areaSpecificFightDescription(1,"You walk through the grimy, ashen streets of cobblestone Skaa slums. The streets are compact, lined with multi-story hovels and tenaments with only the occasional boarded-up window. The streets are filled with beggars and the sick, and you hear coughing ring out as you pass an alley. You decide to head back, but before you do, someone taps on your shoulder. You swivel around, and come face to face with a Skaa Bandit!"));
+                        options.add(20.0, new areaSpecificFightDescription(4,"Your footsteps sound through the ash-covered cobbled streets of the Skaa Slums. You see a lack of people, but don't register what it means until too late - you find yourself surrounded by skaa bandits!"));
                         break;
                     case TINEYE_CLERGY:
-                        options.add("You walk along the main River running through Luthadel, only to realize you've wandered into the Canton of Inquisition. You promtly turn aroun, knowing you may attract attention, but it's too late; a Clergy Tineye perched on one of the many spires of Luthadel has spotted you, and is now curiously approaching you.");
-                        options.add("You find a tineye as you are exploring abandoned buildings. He wears the signature clothes of the clergy; You shout loudly, causing him to clap his hands on his ears. For some reason, he seems angry.");
+                        options.add(50.0, new areaSpecificFightDescription(1,"You walk along the main River running through Luthadel, only to realize you've wandered into the Canton of Inquisition. You promtly turn aroun, knowing you may attract attention, but it's too late; a Clergy Tineye perched on one of the many spires of Luthadel has spotted you, and is now curiously approaching you."));
                         break;
                     case CLERGY_SCOUT:
-                        options.add("You are passed by the occasional horse and wagon as you walk through the clean stone streets of Luthadel's Commercial District. You pass bakeries filling the air with delicious smells, and hear the workers at the woodshop cutting, hammering, and working on the various woodworks to be put up for sale. As you pass yet another carriage, you realize that you are being followed. Parhaps being a ash-covered skaa has attracted the attention of this Clergy Scout, who was watching the main street in an alley. You turn to face him.");
-                        options.add("You climb the walls of luthadel using the stairs. At the very top, a clergy scout is nodding off. You push him into the river. He coughs and sputters, and you realize he cannot swim. As he shouts, a guard comes to rescue him. He approaches you sopping wet and for some reason, angry. 'It's Just a prank, bro,' you tell him. He pulls out a knife.");
+                        options.add(50.0, new areaSpecificFightDescription(1,"You are passed by the occasional horse and wagon as you walk through the clean stone streets of Luthadel's Commercial District. You pass bakeries filling the air with delicious smells, and hear the workers at the woodshop cutting, hammering, and working on the various woodworks to be put up for sale. As you pass yet another carriage, you realize that you are being followed. Parhaps being a ash-covered skaa has attracted the attention of this Clergy Scout, who was watching the main street in an alley. You turn to face him."));
+                        options.add(50.0, new areaSpecificFightDescription(1,"Maybe it was the fact that you appear too confident for a Skaa. Or maybe it was the hurriedness you had when you passed down a street. You caught the attention of a Clergy Scout lurking amongst the Skaa Hovels, and now he is tailing you. Best to get it over with, you think, and turn sharply, catching him off guard."));
                         break;
                 };
                 break;
             case FELLIS:
                 switch(enemy){
                     case NOBLE_GUARD:
-                        options.add("You wander down the quiet streets of Fellis, and pass a carriage. A noble woman in a frilly dress saw you pass, gasped, and said 'It's a SKAA! Get rid of it!' to the guard in the backseat. The guard begrudginly complied. After opening the carriage door, he stepped outside gingerly before calling out 'Stop!'");
+                        options.add(50.0, new areaSpecificFightDescription(1,"You wander down the quiet streets of Fellis, and pass a carriage. A noble woman in a frilly dress saw you pass, gasps, and says 'It's a SKAA! Get rid of it!' to the guard in the backseat. The guard begrudginly complies. After opening the carriage door, he steps outside gingerly before calling out 'Stop!'"));
                         break;
                     case TINEYE_CLERGY:
-                        options.add("As you pass through the quiet streets and quaint shops of Fellis, looking for a bite to eat, you see an obligator walking slowly towards you with a hateful expression on his face. You shout in surprise, causing him to put his hands over his ears - a tineye's reaction.");
+                        options.add(50.0, new areaSpecificFightDescription(1,"As you pass through the quiet streets and quaint shops of Fellis, looking for a bite to eat, you see an obligator walking slowly towards you with a hateful expression on his face. You shout in surprise, causing him to put his hands over his ears - a tineye's reaction."));
                         break;
                     case CLERGY_SCOUT:
+                        options.add(50.0, new areaSpecificFightDescription(1,"The quiet, lo"));
                         break;
                 }
                 break;
             case TRESTING:
                 switch(enemy){
                     case SKAA_BANDIT:
-                        options.add("As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, formerly enslaved, approach you with a knife. He demands roughly for everything you have.");
+                        options.add(50.0, new areaSpecificFightDescription(1,"As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, formerly enslaved, approach you with a knife. He demands roughly for everything you have."));
                         break;
                     case CLERGY_SCOUT:
                         break;
@@ -64,17 +69,20 @@ public class areaSpecificEvent {
             case HATHSIN:
                 switch(enemy){
                 case STEEL_INQUISITOR:
+                    options.add(50.0, new areaSpecificFightDescription(1,"You find youself being watched by a Steel Inquisitor."));
                     break;
                 case MATURE_KOLOSS:
+                    options.add(50.0, new areaSpecificFightDescription(1,"On the ouskirts of the Pits, there is a small group of Koloss. Of of them, so big and mighty his skin looks like it's about to burst, sees you looking at him. He lets out a bellow of rage, and runs towards you."));
                     break;
                 case IMMATURE_KOLOSS:
+                    options.add(50.0, new areaSpecificFightDescription(1,"On the outskirts of the Pits, there is a small group of koloss. One of them, so small his skin is nearly dragging on the floor, sees you looking at him and bellows with rage. He runs towards you, swinging a rough cudgel of wood wildly!"));
                     break;
                 }
                 break;
                 
         }
 
-        if(!options.isEmpty()) {desc = pickOption.fromStrings(options.toArray(new String[0]),r);}
+        if(!options.isEmpty()) {desc = options.next().desc;}
         return desc;
     }
     public enemies pickEnemyFromLocation(areas area){

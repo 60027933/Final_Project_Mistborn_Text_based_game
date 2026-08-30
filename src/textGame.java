@@ -167,11 +167,12 @@ class textGame {
         }
         String[] locationsArray = locations.toArray(new String[0]);
 
+
         int optionPicked = options(s,"Travel Locations: ", locationsArray);
         // so if the optionsPicked number is greater then or equal to the player.location in areas.values()[], add 1
         if(optionPicked >= playerLocationInAreas) optionPicked++;
         printAddons.printS("Your input likely corrosponds to this location: " + areas.values()[optionPicked] + "\n");
-        
+
         if(areas.values()[optionPicked].name().toLowerCase().equals("hathsin")){
             boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No");
             if(willing){

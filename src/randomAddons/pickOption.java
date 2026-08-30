@@ -1,4 +1,4 @@
-package src.Random;
+package src.randomAddons;
 
 import java.util.*;
 import src.Enums.enemies;
