@@ -90,23 +90,30 @@ public class areaSpecificEvent {
         Random r = new Random();
 
         enemies chosenEnemy = enemies.SKAA_BANDIT;
-        enemies[] options;
+        WeightedRandomCollection<enemies> options = new WeightedRandomCollection<>();
         switch(area){
             case LUTHADEL: // SKAA_BANDIT, TINEYE_CLERGY, CLERGY_SCOUT
-                options = new enemies[] {enemies.SKAA_BANDIT, enemies.CLERGY_SCOUT, enemies.TINEYE_CLERGY};
-                chosenEnemy = pickOption.fromEnemyTypes(options,r);
+                options.add(50.0, enemies.SKAA_BANDIT);
+                options.add(20.0, enemies.TINEYE_CLERGY);
+                options.add(30.0, enemies.CLERGY_SCOUT);
+                chosenEnemy = options.next();
                 break;
             case FELLIS: // NOBLE_GUARD, TINEYE_CLERGY, CLERGY_SCOUT
-                options = new enemies[] {enemies.NOBLE_GUARD, enemies.CLERGY_SCOUT, enemies.TINEYE_CLERGY};
-                chosenEnemy = pickOption.fromEnemyTypes(options,r);
+                options.add(75.0, enemies.NOBLE_GUARD);
+                options.add(20.0, enemies.CLERGY_SCOUT);
+                options.add(20.0, enemies.TINEYE_CLERGY);
+                chosenEnemy = options.next();
                 break;
             case TRESTING: // SKAA_BANDIT, CLERGY_SCOUT
-                options = new enemies[] {enemies.SKAA_BANDIT, enemies.CLERGY_SCOUT};
-                chosenEnemy = pickOption.fromEnemyTypes(options,r);
+                options.add(75.0, enemies.SKAA_BANDIT);
+                options.add(25.0, enemies.CLERGY_SCOUT);
+                chosenEnemy = options.next();
                 break;
             case HATHSIN: // STEEL_INQUISITOR, MATURE_KOLOSS, IMMATURE_KOLOSS,
-                options = new enemies[] {enemies.STEEL_INQUISITOR, enemies.MATURE_KOLOSS, enemies.IMMATURE_KOLOSS};
-                chosenEnemy = pickOption.fromEnemyTypes(options,r);
+                options.add(15.0,enemies.STEEL_INQUISITOR);
+                options.add(35.0, enemies.MATURE_KOLOSS);
+                options.add(35.0, enemies.IMMATURE_KOLOSS);
+                chosenEnemy = options.next();
                 break;
         }
         return chosenEnemy;
