@@ -17,6 +17,7 @@ class textGame {
         public areas location;
         public int dmg;
         public int currency;
+        public int phase = 0;
         public player(int health, calandar time, areas location, int dmg, int currency){
             this.health = health;
             this.time = time;
@@ -97,6 +98,8 @@ class textGame {
         //third: 'regular turn'
         regularTurn(s, player);
         //then, recursively call itself until the final event in (assume it's like year three or something)
+        
+        player.phase = player.time.year - 1;
         if(player.time.getYear() < 3) {
             printAddons.wait(s);
             player = gameTurn(player, s);
@@ -178,6 +181,8 @@ class textGame {
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
+
+                printAddons.printS(travelDescriptions.desc_from_area(player.location));
                 printAddons.printS("\nTraveling takes 1 week.");
             }
             else{
@@ -189,6 +194,8 @@ class textGame {
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
+                
+                printAddons.printS(travelDescriptions.desc_from_area(player.location));
                 printAddons.printS("\nTraveling takes 1 week.");
             }
             else{
@@ -221,7 +228,7 @@ class textGame {
         printAddons.printS("\n"+battle.description);
         printAddons.printS("\n(There will be a proper battle system in the future)\n");
         printAddons.pause();
-        printAddons.printS("You Fight " + battle.enemyCount + " " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy) + " Health.");
+        printAddons.printS("You Fight " + battle.enemyCount + " " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy)*battle.enemyCount + " Health.");
         player.health -= battle.healthOfEnemy(battle.enemy)*battle.enemyCount;
         printAddons.printS("\nYou gain "+battle.currencyHeldOnEnemy(battle.enemy)*battle.enemyCount+" Boxings (currency)");
         player.currency += battle.currencyHeldOnEnemy(battle.enemy)*battle.enemyCount;
