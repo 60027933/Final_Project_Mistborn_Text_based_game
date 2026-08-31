@@ -16,7 +16,7 @@ public class areaSpecificEvent {
     public turnEventTypes eventType;
     public String description;
     public enemies enemy;
-    public int enemyCount;
+    public int enemyCount = 1;
     public areaSpecificEvent(turnEventTypes eventType, areas area){
         this.eventType = eventType;
         this.enemy = pickEnemyFromLocation(area);
@@ -24,7 +24,6 @@ public class areaSpecificEvent {
     }
     public String pickDescriptionFromOtherFactors(areas area,enemies enemy){
         String desc = "Default event decription";
-        Random r = new Random();
         WeightedRandomCollection<areaSpecificFightDescription> options = new WeightedRandomCollection<>();
 
         switch(area){ // AREA SPECIFIC DESCRIPTION, 
@@ -71,23 +70,24 @@ public class areaSpecificEvent {
                 case STEEL_INQUISITOR:
                     options.add(50.0, new areaSpecificFightDescription(1,"You find youself being watched by a Steel Inquisitor."));
                     break;
-                case MATURE_KOLOSS:
-                    options.add(50.0, new areaSpecificFightDescription(1,"On the ouskirts of the Pits, there is a small group of Koloss. Of of them, so big and mighty his skin looks like it's about to burst, sees you looking at him. He lets out a bellow of rage, and runs towards you."));
-                    break;
-                case IMMATURE_KOLOSS:
-                    options.add(50.0, new areaSpecificFightDescription(1,"On the outskirts of the Pits, there is a small group of koloss. One of them, so small his skin is nearly dragging on the floor, sees you looking at him and bellows with rage. He runs towards you, swinging a rough cudgel of wood wildly!"));
+                case HATHSIN_GUARD:
+                    options.add(50.0, new areaSpecificFightDescription(1,""));
+                    options.add(50.0, new areaSpecificFightDescription(3,""));
+                    options.add(10.0, new areaSpecificFightDescription(12,""));
                     break;
                 }
                 break;
                 
         }
-
-        if(!options.isEmpty()) {desc = options.next().desc;}
+        areaSpecificFightDescription chosen_option = options.next();
+        if(!options.isEmpty() && options != null) {
+            desc = chosen_option.desc; 
+            enemyCount = chosen_option.enemyAmount;
+        }
         return desc;
     }
     public enemies pickEnemyFromLocation(areas area){
         //AREAS: LUTHADEL, 
-        Random r = new Random();
 
         enemies chosenEnemy = enemies.SKAA_BANDIT;
         WeightedRandomCollection<enemies> options = new WeightedRandomCollection<>();
@@ -111,8 +111,7 @@ public class areaSpecificEvent {
                 break;
             case HATHSIN: // STEEL_INQUISITOR, MATURE_KOLOSS, IMMATURE_KOLOSS,
                 options.add(15.0,enemies.STEEL_INQUISITOR);
-                options.add(35.0, enemies.MATURE_KOLOSS);
-                options.add(35.0, enemies.IMMATURE_KOLOSS);
+                options.add(80.0,enemies.HATHSIN_GUARD);
                 chosenEnemy = options.next();
                 break;
         }
@@ -142,6 +141,9 @@ public class areaSpecificEvent {
             case NOBLE_GUARD:
                 health = 50;
                 break;
+            case HATHSIN_GUARD:
+                health = 50;
+                break;
         }
         return health;
     }
@@ -168,6 +170,9 @@ public class areaSpecificEvent {
                 break; 
             case NOBLE_GUARD:
                 boxings = 40;
+                break;
+            case HATHSIN_GUARD:
+                boxings = 30;
                 break;
         }
         return boxings;

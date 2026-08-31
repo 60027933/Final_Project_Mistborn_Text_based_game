@@ -221,10 +221,10 @@ class textGame {
         printAddons.printS("\n"+battle.description);
         printAddons.printS("\n(There will be a proper battle system in the future)\n");
         printAddons.pause();
-        printAddons.printS("You Fight the " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy) + " Health.");
-        player.health -= battle.healthOfEnemy(battle.enemy);
-        printAddons.printS("\nYou gain 5 Boxings (currency)");
-        player.currency += 5;
+        printAddons.printS("You Fight " + battle.enemyCount + " " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy) + " Health.");
+        player.health -= battle.healthOfEnemy(battle.enemy)*battle.enemyCount;
+        printAddons.printS("\nYou gain "+battle.currencyHeldOnEnemy(battle.enemy)*battle.enemyCount+" Boxings (currency)");
+        player.currency += battle.currencyHeldOnEnemy(battle.enemy)*battle.enemyCount;
         return player;
     }
     public static String getInput(Scanner s){

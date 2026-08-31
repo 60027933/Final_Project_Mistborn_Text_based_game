@@ -17,11 +17,19 @@ public class WeightedRandomCollection<T> {
     }
 
     public T next() {
+        // Prevent crash if next() is called on an empty collection
+        if (map.isEmpty()) {
+            return null; // Or throw an IllegalStateException
+        }
+        
         // Generate a random cursor between 0.0 (inclusive) and totalWeight (exclusive)
         double value = random.nextDouble() * totalWeight;
-        // Returns the entry associated with the least key strictly greater than 'value'
-        return map.higherEntry(value).getValue();
+        
+        // FIX: Use ceilingEntry to get the entry greater than OR equal to 'value'
+        return map.ceilingEntry(value).getValue();
     }
+
+
     public boolean isEmpty(){
         if(map.isEmpty()){return true;}else{return false;}
     }
