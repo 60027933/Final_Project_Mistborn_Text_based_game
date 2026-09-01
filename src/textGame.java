@@ -2,7 +2,6 @@ package src;
 // Import the ArrayList class
 //import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
-
 import src.Events.*;
 import src.Enums.*;
 import src.Time.calandar;
@@ -18,6 +17,8 @@ class textGame {
         public int dmg;
         public int currency;
         public int phase = 0;
+        public boolean[] areasVisited = new boolean[areas.values().length];
+
         public player(int health, calandar time, areas location, int dmg, int currency){
             this.health = health;
             this.time = time;
@@ -182,8 +183,8 @@ class textGame {
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
 
-                printAddons.printS(travelDescriptions.desc_from_area(player.location));
                 printAddons.printS("\nTraveling takes 1 week.");
+                printAddons.printS(travelDescriptions.desc_from_area(player.location));
             }
             else{
                 printAddons.printS("As you debate this, you realize that your day is spent.");
@@ -194,9 +195,9 @@ class textGame {
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
-                
-                printAddons.printS(travelDescriptions.desc_from_area(player.location));
+
                 printAddons.printS("\nTraveling takes 1 week.");
+                printAddons.printS(travelDescriptions.desc_from_area(player.location));
             }
             else{
                 printAddons.printS("As you debate this, you realize that your day is spent.");
