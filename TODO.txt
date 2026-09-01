@@ -1,0 +1,6 @@
+Tasks:
+Inventory, items
+Talking encounters
+Characters
+Battle System
+
