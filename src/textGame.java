@@ -27,7 +27,8 @@ class textGame {
             this.currency = currency;
         }
         public areaSpecificEvent pickEvent(){
-            areaSpecificEvent returnValue = new areaSpecificEvent(turnEventTypes.ENEMY, this.location);
+            // add more events
+            areaSpecificEvent returnValue = new areaSpecificEvent(eventTypes.ENEMY, this.location);
             return returnValue;
         }
         
@@ -213,7 +214,7 @@ class textGame {
     }
     public static player explore(player player, Scanner s){
         areaSpecificEvent exploreEvent = player.pickEvent(); // eventType, description, enemies
-        if(exploreEvent.eventType == turnEventTypes.ENEMY) player = battle(player,exploreEvent,s);
+        if(exploreEvent.eventType == eventTypes.ENEMY) player = battle(player,exploreEvent,s);
         return player;
     }
     public static void status(player player){

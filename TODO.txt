@@ -1,6 +1,13 @@
 Tasks:
 Inventory, items
 Talking encounters
+	- Location bound encounters, somewhat random?
+		-dynamic explore options, a pick three kind of thing
+			-add option to make sure one option is picked should criteria be fulfilled
+
+	- Smart options leading to different outcomes based on decision
 Characters
 Battle System
+Shift options to seperate file
+
 
