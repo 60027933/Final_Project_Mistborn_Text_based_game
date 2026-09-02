@@ -1,9 +1,9 @@
 package src.Events;
 
-public class areaSpecificFightDescription {
+public class fightDescription {
     public String desc;
     public int enemyAmount;
-    public areaSpecificFightDescription(int enemyAmount, String desc){
+    public fightDescription(int enemyAmount, String desc){
         this.desc = desc;
         this.enemyAmount = enemyAmount;
     }

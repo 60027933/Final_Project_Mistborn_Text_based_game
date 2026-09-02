@@ -5,6 +5,7 @@ import java.util.*;
 import src.Events.*;
 import src.Enums.*;
 import src.Time.calandar;
+import src.randomAddons.pickOption;
 import src.Print.*;
 // enum inventory objs;
 class textGame {
@@ -26,9 +27,10 @@ class textGame {
             this.dmg = dmg;
             this.currency = currency;
         }
-        public areaSpecificEvent pickEvent(){
-            // add more events
-            areaSpecificEvent returnValue = new areaSpecificEvent(eventTypes.ENEMY, this.location);
+        public randomAreaEvents pickEvent(){
+            Random r = new Random();
+            eventTypes eventType = pickOption.fromEventTypes(new eventTypes[]{eventTypes.ENEMY,eventTypes.INFO},r);
+            randomAreaEvents returnValue = new randomAreaEvents(eventType, this.location);
             return returnValue;
         }
         
@@ -213,7 +215,7 @@ class textGame {
         return health = 100; // change this so that it can dynamically change?
     }
     public static player explore(player player, Scanner s){
-        areaSpecificEvent exploreEvent = player.pickEvent(); // eventType, description, enemies
+        randomAreaEvents exploreEvent = player.pickEvent(); // eventType, description, enemies
         if(exploreEvent.eventType == eventTypes.ENEMY) player = battle(player,exploreEvent,s);
         return player;
     }
@@ -226,7 +228,7 @@ class textGame {
         printAddons.pause();
         printAddons.printS("Your munnies you gots in yo purse: " + player.currency + "\n");
     }
-    public static player battle(player player, areaSpecificEvent battle, Scanner s){
+    public static player battle(player player, randomAreaEvents battle, Scanner s){
         printAddons.printS("\n"+battle.description);
         printAddons.printS("\n(There will be a proper battle system in the future)\n");
         printAddons.pause();

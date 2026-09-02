@@ -2,6 +2,7 @@ package src.randomAddons;
 
 import java.util.*;
 import src.Enums.enemies;
+import src.Enums.eventTypes;
 
 public class pickOption {
     public static enemies fromEnemyTypes(enemies[] choices, Random r){ // application: pickOption.fromEnemyTypes
@@ -13,5 +14,10 @@ public class pickOption {
         String strChosen = "Default pickOption.fromStrings() str";
         strChosen = choices[r.nextInt(choices.length)];
         return strChosen;
+    }
+    public static eventTypes fromEventTypes(eventTypes[] choices, Random r){
+        eventTypes typeChosen = eventTypes.ENEMY; // default;
+        typeChosen = choices[r.nextInt(choices.length)];
+        return typeChosen;
     }
 }
