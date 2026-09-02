@@ -2,7 +2,7 @@ package src.Print;
 
 import java.util.Scanner;
 
-public class printAddons {
+public class pAdd {
     public static void printS(String text){
         //print slow
         text = wordWrap(text, 120);
