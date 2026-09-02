@@ -75,17 +75,18 @@ class textGame {
         boolean returnValue = true;
         
         pAdd.printS("Welcome to the MISTBORN ADVENTURE GAME.\n\n");
-        boolean understanding = option(s, "Have you read mistborn?", "Yes","No");
+        boolean understanding = option(s, "Have you read mistborn?", "Yes","No",true);
         if(!understanding){
-            boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No");
+            boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No",true);
             if(!spoilers){ pAdd.printS("\nGo read Mistborn. It's a fantastic book. This game can wait fr"); returnValue = false;}
             if(!understanding && spoilers) {
-                pAdd.printS("Okay so Mistborn is a series of epic fantasy novels by the author Brandon Sanderson and published by Tor Books. The first trilogy, commonly referred to as \"Era One\", was published between 2006 and 2008 and consists of The Final Empire, The Well of Ascension, and The Hero of Ages.");
-                pAdd.pause();pAdd.pause();
+                pAdd.printS("Alright. I'm about to get you up to speed on the basic lore, so feel free to opt out now:");
+                if(!option(s,"( Yes [opt out], No [continue the game] )","Yes","No",false)){
+                    pAdd.pause();pAdd.pause();
 
-                pAdd.printS("\nIn Mistborn, 1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people he now ruled under were split into two classes based off whether they supported him in his conquering: The Skaa, or slaves, which did not; and the Nobility, who did.");
-                pAdd.printS("\nEverything else you need to know should be explained in-game as it happens");
-                pAdd.wait(s);
+                    pAdd.printS(30,"\n1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people in his kingdom under were split into two classes based off whether they supported him: The Skaa, or slaves, did not, and the Nobility, who did.");
+                    pAdd.wait(s);
+                }else{returnValue = false;}
             }   
         }
         else pAdd.printS("\nThank you. It is important you understand that there IS spoilers in this game.");
@@ -200,7 +201,7 @@ class textGame {
         pAdd.printS("Your input likely corrosponds to this location: " + areas.values()[optionPicked] + "\n");
 
         if(areas.values()[optionPicked].name().toLowerCase().equals("hathsin")){
-            boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No");
+            boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No",true);
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
@@ -213,7 +214,7 @@ class textGame {
             }
         }
         else{
-            boolean willing = option(s,"Are you willing?","Yes","No");
+            boolean willing = option(s,"Are you willing?","Yes","No",true);
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
@@ -273,8 +274,14 @@ class textGame {
         if(oneWord) input = input.replaceAll("\\s", "");
         return input;
     }
-    public static boolean option(Scanner s, String prompt, String expectedValue, String negatoryValue){ // SINGLE OPTION for true / false type questions
-        pAdd.printS(String.format("%s (%s, %s)\n",prompt,expectedValue,negatoryValue));
+    public static boolean option(Scanner s, String prompt, String expectedValue, String negatoryValue,boolean showOptions){ // SINGLE OPTION for true / false type questions
+        pAdd.printS(String.format("%s %s %s %s %s %s\n", // look at this ridiculous thing
+        prompt,
+        (showOptions) ? "(" : "",
+        (showOptions) ? expectedValue : "",
+        (showOptions) ? "," : "",
+        (showOptions) ? negatoryValue : "",
+        (showOptions) ? ")" : ""));
         // clean the text for comparisons
         expectedValue = cleanText(expectedValue, false);
         negatoryValue = cleanText(negatoryValue, false);

@@ -17,6 +17,19 @@ public class pAdd {
             }
         }
     }
+    public static void printS(int speed, String text){ // this is called method overloading, where it defaults to the function which parameters are filled.
+        text = wordWrap(text, 120);
+        for(int i = 0; i < text.length(); i++){
+            try{
+                System.out.print(text.charAt(i));
+                Thread.sleep(speed);
+            } catch (InterruptedException e) {
+                System.out.println("Thread was interrupted.");
+                // best practice somehow?
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
     public static void pause(){
         try{
             Thread.sleep(500);

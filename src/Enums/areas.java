@@ -9,3 +9,4 @@ public enum areas {
     HATHSIN // pits of hathsin, skaa labour camp where only one person has survived (kelsier).
     //'skaa climb down suffocatingly narrow gorges and reach into crystal-lines niches to find geodes that contain atium.'
 }
+    

@@ -32,7 +32,7 @@ public class randomAreaEvents {
                 case LUTHADEL:
                     switch(enemy){
                         case SKAA_BANDIT:
-                            options.add(50.0, new fightDescription(1,"You approached by a skaa bandit fr"));
+                            options.add(50.0, new fightDescription(1,"(p)You approached by a skaa bandit fr"));
                             options.add(70.0, new fightDescription(1,"You walk through the grimy, ashen streets of cobblestone Skaa slums. The streets are compact, lined with multi-story hovels and tenaments with only the occasional boarded-up window. The streets are filled with beggars and the sick, and you hear coughing ring out as you pass an alley. You decide to head back, but before you do, someone taps on your shoulder. You swivel around, and come face to face with a Skaa Bandit!"));
                             options.add(20.0, new fightDescription(4,"Your footsteps sound through the ash-covered cobbled streets of the Skaa Slums. You see a lack of people, but don't register what it means until too late - you find yourself surrounded by skaa bandits!"));
                             break;
@@ -41,7 +41,7 @@ public class randomAreaEvents {
                             break;
                         case CLERGY_SCOUT:
                             options.add(50.0, new fightDescription(1,"You are passed by the occasional horse and wagon as you walk through the clean stone streets of Luthadel's Commercial District. You pass bakeries filling the air with delicious smells, and hear the workers at the woodshop cutting, hammering, and working on the various woodworks to be put up for sale. As you pass yet another carriage, you realize that you are being followed. Parhaps being a ash-covered skaa has attracted the attention of this Clergy Scout, who was watching the main street in an alley. You turn to face him."));
-                            options.add(50.0, new fightDescription(1,"Maybe it was the fact that you appear too confident for a Skaa. Or maybe it was the hurriedness you had when you passed down a street. You caught the attention of a Clergy Scout lurking amongst the Skaa Hovels, and now he is tailing you. Best to get it over with, you think, and turn sharply, catching him off guard."));
+                            options.add(50.0, new fightDescription(1,"(p)For sum reeson you atrakt a clerjy scout"));
                             break;
                     };
                     break;
@@ -54,14 +54,14 @@ public class randomAreaEvents {
                             options.add(50.0, new fightDescription(1,"As you pass through the quiet streets and quaint shops of Fellis, looking for a bite to eat, you see an obligator walking slowly towards you with a hateful expression on his face. You shout in surprise, causing him to put his hands over his ears - a tineye's reaction."));
                             break;
                         case CLERGY_SCOUT:
-                            options.add(50.0, new fightDescription(1,"The quiet, lo"));
+                            options.add(50.0, new fightDescription(1,"(p)Spotted by clergy scout"));
                             break;
                     }
                     break;
                 case TRESTING:
                     switch(enemy){
                         case SKAA_BANDIT:
-                            options.add(50.0, new fightDescription(1,"As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, formerly enslaved, approach you with a knife. He demands roughly for everything you have."));
+                            options.add(50.0, new fightDescription(1,"As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, probably a former worker, approach you with a knife. He demands for everything that you have."));
                             break;
                         case CLERGY_SCOUT:
                             break;
@@ -70,11 +70,11 @@ public class randomAreaEvents {
                 case HATHSIN:
                     switch(enemy){
                     case STEEL_INQUISITOR:
-                        options.add(50.0, new fightDescription(1,"You find youself being watched by a Steel Inquisitor."));
+                        options.add(50.0, new fightDescription(1,"(p)You find youself being watched by a Steel Inquisitor."));
                         break;
                     case HATHSIN_GUARD:
                         options.add(50.0, new fightDescription(1,"(P)Fight with 1 hathsin guard"));
-                        options.add(50.0, new fightDescription(3,"(P)Fight with 3 hathsin guards"));
+                        options.add(20.0, new fightDescription(3,"(P)Fight with 3 hathsin guards"));
                         options.add(5.0, new fightDescription(12,"(P)Fight with 12 hathsin guards"));
                         break;
                     }
@@ -107,7 +107,7 @@ public class randomAreaEvents {
                     break;
                 case HATHSIN:
                     options.add(50.0,"\n(P)Stomach turning Pits descriptions");
-                    options.add(10.0,"\n(P)Witness of beatings or something");
+                    options.add(30.0,"\n(P)You witness something disturbing, a mistwraith maybe");
                     break;
             }
             String chosen_option = options.next();
@@ -124,25 +124,25 @@ public class randomAreaEvents {
         WeightedRandomCollection<enemies> options = new WeightedRandomCollection<>();
         switch(area){
             case LUTHADEL: // SKAA_BANDIT, TINEYE_CLERGY, CLERGY_SCOUT
-                options.add(50.0, enemies.SKAA_BANDIT);
+                options.add(60.0, enemies.SKAA_BANDIT);
                 options.add(20.0, enemies.TINEYE_CLERGY);
-                options.add(30.0, enemies.CLERGY_SCOUT);
+                options.add(20.0, enemies.CLERGY_SCOUT);
                 chosenEnemy = options.next();
                 break;
             case FELLIS: // NOBLE_GUARD, TINEYE_CLERGY, CLERGY_SCOUT
                 options.add(75.0, enemies.NOBLE_GUARD);
-                options.add(20.0, enemies.CLERGY_SCOUT);
-                options.add(20.0, enemies.TINEYE_CLERGY);
+                options.add(15.0, enemies.CLERGY_SCOUT);
+                options.add(15.0, enemies.TINEYE_CLERGY);
                 chosenEnemy = options.next();
                 break;
             case TRESTING: // SKAA_BANDIT, CLERGY_SCOUT
                 options.add(75.0, enemies.SKAA_BANDIT);
-                options.add(25.0, enemies.CLERGY_SCOUT);
+                options.add(15.0, enemies.CLERGY_SCOUT);
                 chosenEnemy = options.next();
                 break;
             case HATHSIN: // STEEL_INQUISITOR, MATURE_KOLOSS, IMMATURE_KOLOSS,
-                options.add(15.0,enemies.STEEL_INQUISITOR);
-                options.add(80.0,enemies.HATHSIN_GUARD);
+                options.add(5.0, enemies.STEEL_INQUISITOR);
+                options.add(70.0, enemies.HATHSIN_GUARD);
                 chosenEnemy = options.next();
                 break;
         }
