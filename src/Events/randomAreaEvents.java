@@ -73,9 +73,9 @@ public class randomAreaEvents {
                         options.add(50.0, new fightDescription(1,"You find youself being watched by a Steel Inquisitor."));
                         break;
                     case HATHSIN_GUARD:
-                        options.add(50.0, new fightDescription(1,""));
-                        options.add(50.0, new fightDescription(3,""));
-                        options.add(10.0, new fightDescription(12,""));
+                        options.add(50.0, new fightDescription(1,"(P)Fight with 1 hathsin guard"));
+                        options.add(50.0, new fightDescription(3,"(P)Fight with 3 hathsin guards"));
+                        options.add(5.0, new fightDescription(12,"(P)Fight with 12 hathsin guards"));
                         break;
                     }
                     break;
@@ -92,19 +92,22 @@ public class randomAreaEvents {
 
             switch(area){
                 case LUTHADEL:
-                    options.add(50.0,"");
-                    options.add(50.0,"");
-                    options.add(5.0,"");
+                    options.add(50.0,"\n(P)Luthadel Observations");
+                    options.add(50.0,"\n(P)Walk by the manors");
+                    options.add(10.0,"\n(P)Watched by an inquisitor");
+                    options.add(20.0,"\n(P)You see a Skaa crew at work");
                     break;
                 case TRESTING:
-                    options.add(50.0,"");
+                    options.add(50.0,"\n(P)Tresting Observations");
+                    options.add(50.0,"\n(P)Walk through the wrecked manor");
                     break;
                 case FELLIS:
-                    options.add(50.0,"");
+                    options.add(50.0,"\n(P)Walk through the pleasant, clean streets");
+                    options.add(50.0,"\n(p)Small talk with a noble lord");
                     break;
                 case HATHSIN:
-                    options.add(50.0,"");
-                    options.add(10.0,"");
+                    options.add(50.0,"\n(P)Stomach turning Pits descriptions");
+                    options.add(10.0,"\n(P)Witness of beatings or something");
                     break;
             }
             String chosen_option = options.next();

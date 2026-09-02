@@ -5,6 +5,7 @@ import src.Enums.*;
 import src.randomAddons.*;
 public class travelDescriptions {
     public static String desc_from_area(areas area){
+        // returns a random description of travelling to the specified area
         Random r = new Random();
         String desc = "Default description";
         ArrayList<String> options = new ArrayList<>();
