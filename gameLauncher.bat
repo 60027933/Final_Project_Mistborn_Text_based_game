@@ -124,6 +124,3 @@ cls
 java -cp bin src/textGame
 
 echo.
-pause
-timeout 3 > NUL
-cls
