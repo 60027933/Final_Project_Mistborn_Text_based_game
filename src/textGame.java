@@ -84,7 +84,7 @@ class textGame {
                 if(!option(s,"( Yes [opt out], No [continue the game] )","Yes","No",false)){
                     pAdd.pause();pAdd.pause();
 
-                    pAdd.printS(30,"\n1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people in his kingdom under were split into two classes based off whether they supported him: The Skaa, or slaves, did not, and the Nobility, who did.");
+                    pAdd.printS(30,"\n1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people in his kingdom were split into two classes based off whether they supported him: The Skaa, or slaves, did not, and the Nobility, who did.");
                     pAdd.wait(s);
                 }else{returnValue = false;}
             }   
@@ -260,7 +260,7 @@ class textGame {
         return player;
     }
     public static player InfoEvent(player player, randomAreaEvents info, Scanner s){
-        pAdd.printS(info.description);
+        pAdd.printS(15,info.description);
         return player;
     }
     public static String getInput(Scanner s){
