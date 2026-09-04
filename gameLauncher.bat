@@ -121,6 +121,8 @@ powershell -command "Add-Type -Name W -Namespace '' -MemberDefinition '[DllImpor
 timeout 1 > NUL
 cls
 
+mode con: cols=100 lines=40
+
 java -cp bin src/textGame
 
 echo.
