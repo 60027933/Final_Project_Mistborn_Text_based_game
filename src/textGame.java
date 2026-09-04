@@ -90,7 +90,7 @@ class textGame {
             }   
         }
         else pAdd.printS("\nThank you. It is important you understand that there IS spoilers in this game.");
-        pAdd.pause();
+        pAdd.pause();pAdd.pause();pAdd.pause();
         return returnValue;
     }
     public static void beginStory(Scanner s){
@@ -105,12 +105,12 @@ class textGame {
         pAdd.printS("\n\nWith that said, let's get into the story.");
         pAdd.pause();pAdd.pause();
         pAdd.printS("\n\nYou are a skaa assigned to work the fields in the TRESTING PLANTATION.");
-        pAdd.pause();
+        pAdd.pause();pAdd.pause();
         pAdd.printS("\nA strange man in a strange cloak showed up yesterday who called himself Kelsier, the survivor of Hathsin. And this morning the manor is burning.");
         pAdd.pause();
         pAdd.printS("\nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors find the burned manor and dead nobility, they will assume the skaa were responsible.");
-        pAdd.pause();
-        pAdd.printS("\nYou choose not to go which the other skaa in hiding, but rather to set out on your own in search of a better life.");
+        pAdd.pause();pAdd.pause();
+        pAdd.printS(30,"\nYou choose not to go which the other skaa in hiding, but rather to set out on your own in search of a better life.");
         pAdd.pause();
         pAdd.wait(s);
     }
