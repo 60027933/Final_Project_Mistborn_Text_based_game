@@ -2,10 +2,10 @@ package src.Print;
 
 import java.util.Scanner;
 
-public class pAdd {
-    public static void printS(String text){
+public class print {
+    public static void s(String text){
         //print slow
-        text = wordWrap(text, 100);
+        text = wordWrap(text, 97);
         for(int i = 0; i < text.length(); i++){
             try{
                 System.out.print(text.charAt(i));
@@ -17,8 +17,8 @@ public class pAdd {
             }
         }
     }
-    public static void printS(int speed, String text){ // this is called method overloading, where it defaults to the function which parameters are filled.
-        text = wordWrap(text, 100);
+    public static void s(int speed, String text){ // this is called method overloading, where it defaults to the function which parameters are filled.
+        text = wordWrap(text, 97);
         for(int i = 0; i < text.length(); i++){
             try{
                 System.out.print(text.charAt(i));
