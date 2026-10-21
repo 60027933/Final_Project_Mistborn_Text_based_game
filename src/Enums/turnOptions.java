@@ -2,7 +2,7 @@ package src.Enums;
 
 public enum turnOptions {
     TRAVEL,
-    SLEEP,
+    REST,
     EXPLORE,
     STATUS
 }

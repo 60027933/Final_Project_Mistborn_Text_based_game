@@ -106,8 +106,8 @@ class textGame {
         // give options to player,
         // travel, sleep, explore
         turnOptions turn = giveTurnOptions(s);
-        if(turn == turnOptions.SLEEP) {
-            player.health = sleep(player.health);
+        if(turn == turnOptions.REST) {
+            player.health = rest(player.health);
         }
         if(turn == turnOptions.EXPLORE){
             player = explore(player,s);
@@ -123,15 +123,15 @@ class textGame {
     }
 
     public static turnOptions giveTurnOptions(Scanner s){ // REGULAR TURN
-        turnOptions optionPicked = turnOptions.SLEEP;
-        String[] options = {"Travel", "Sleep", "Explore", "Status"};
+        turnOptions optionPicked = turnOptions.REST;
+        String[] options = {"Travel", "Rest", "Explore", "Status"};
         int optionChose = input.give_options(s,"You can: ", options);
         switch(optionChose){
             case 0:
                 optionPicked = turnOptions.TRAVEL;
                 break;
             case 1:
-                optionPicked = turnOptions.SLEEP;
+                optionPicked = turnOptions.REST;
                 break;
             case 2:
                 optionPicked = turnOptions.EXPLORE;
@@ -197,7 +197,7 @@ class textGame {
         }
         return player;
     }
-    public static int sleep(int health){
+    public static int rest(int health){
         // So the player sleeps, a day passes, and you gain health.
         print.s("You sleep, regaining some health. Health is now 100\n");
         print.pause();
