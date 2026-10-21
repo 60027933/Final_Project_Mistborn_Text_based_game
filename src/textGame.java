@@ -58,7 +58,7 @@ class textGame {
                 }else{returnValue = false;}
             }   
         }
-        else print.s("\nThank you for confirming. Nevertheless, It is important you understand that there IS spoilers in this game.");
+        else print.s("\nThank you for confirming. It is important you understand that there IS spoilers in this game.");
         print.pause();print.pause();print.pause();
         return returnValue;
     }
@@ -219,7 +219,7 @@ class textGame {
         print.s("Your munnies you gots in yo purse: " + player.currency + "\n");
     }
     public static player battle(player player, randomAreaEvents event, Scanner s){
-        player = battle.placeholder(player,event);
+        player = battle.fight(player,event,s);
         return player;
     }
     public static player InfoEvent(player player, randomAreaEvents info, Scanner s){
