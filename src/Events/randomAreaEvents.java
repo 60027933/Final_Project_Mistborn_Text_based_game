@@ -42,6 +42,8 @@ public class randomAreaEvents {
                             options.add(50.0, new fightDescription(1,"You are passed by the occasional horse and wagon as you walk through the clean stone streets of Luthadel's Commercial District. You pass bakeries filling the air with delicious smells, and hear the workers at the woodshop cutting, hammering, and working on the various woodworks to be put up for sale. As you pass yet another carriage, you realize that you are being followed. Parhaps being a ash-covered skaa has attracted the attention of this Clergy Scout, who was watching the main street in an alley. You turn to face him."));
                             options.add(50.0, new fightDescription(1,"(p)For sum reeson you atrakt a clerjy scout"));
                             break;
+                        default:
+                            break;
                     };
                     break;
                 case FELLIS:
@@ -55,6 +57,8 @@ public class randomAreaEvents {
                         case CLERGY_SCOUT:
                             options.add(50.0, new fightDescription(1,"(p)Spotted by clergy scout"));
                             break;
+                        default:
+                            break;
                     }
                     break;
                 case TRESTING:
@@ -63,6 +67,8 @@ public class randomAreaEvents {
                             options.add(50.0, new fightDescription(1,"As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, probably a former worker, approach you with a knife. He demands for everything that you have."));
                             break;
                         case CLERGY_SCOUT:
+                            break;
+                        default:
                             break;
                     }
                     break;
@@ -76,8 +82,11 @@ public class randomAreaEvents {
                         options.add(20.0, new fightDescription(3,"(P)Fight with 3 hathsin guards"));
                         options.add(5.0, new fightDescription(12,"(P)Fight with 12 hathsin guards"));
                         break;
+                    default:
+                        break;
                     }
                     break;
+                    
                     
             }
             fightDescription chosen_option = options.next();
