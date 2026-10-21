@@ -1,4 +1,4 @@
-package src.Print;
+package src.Text;
 
 import java.util.Scanner;
 
