@@ -5,9 +5,10 @@ import java.util.*;
 import src.Events.*;
 import src.Enums.*;
 import src.Time.calandar;
-import src.randomAddons.pickOption;
-import src.Print.*;
 import src.Player.*;
+import src.Text.*;
+import src.Input.*;
+
 // enum inventory objs;
 class textGame {
 
@@ -43,13 +44,13 @@ class textGame {
         boolean returnValue = true;
         
         print.s("Welcome to the MISTBORN ADVENTURE GAME.\n\n");
-        boolean understanding = option(s, "Have you read mistborn?", "Yes","No",true);
+        boolean understanding = input.give_option(s, "Have you read mistborn?", "Yes","No",true);
         if(!understanding){
-            boolean spoilers = option(s, "Are you okay with spoilers to Mistborn?","Yes", "No",true);
+            boolean spoilers = input.give_option(s, "Are you okay with spoilers to Mistborn?","Yes", "No",true);
             if(!spoilers){ print.s("\nGo read Mistborn. It's a fantastic book. This game can wait fr"); returnValue = false;}
             if(!understanding && spoilers) {
                 print.s("Alright. I'm about to get you up to speed on the basic lore, so feel free to opt out now:");
-                if(!option(s,"\n( Yes [opt out], No [continue the game] )","Yes","No",false)){
+                if(!input.give_option(s,"\n( Yes [opt out], No [continue the game] )","Yes","No",false)){
                     print.pause();print.pause();
 
                     print.s(30,"\n1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people in his kingdom were split into two classes based off whether they supported him: The Skaa, or slaves, did not, and the Nobility did.");
@@ -57,7 +58,7 @@ class textGame {
                 }else{returnValue = false;}
             }   
         }
-        else print.s("\nThank you. It is important you understand that there IS spoilers in this game.");
+        else print.s("\nThank you for confirming. Nevertheless, It is important you understand that there IS spoilers in this game.");
         print.pause();print.pause();print.pause();
         return returnValue;
     }
@@ -124,7 +125,7 @@ class textGame {
     public static turnOptions giveTurnOptions(Scanner s){ // REGULAR TURN
         turnOptions optionPicked = turnOptions.SLEEP;
         String[] options = {"Travel", "Sleep", "Explore", "Status"};
-        int optionChose = options(s,"You can: ", options);
+        int optionChose = input.give_options(s,"You can: ", options);
         switch(optionChose){
             case 0:
                 optionPicked = turnOptions.TRAVEL;
@@ -163,13 +164,13 @@ class textGame {
         String[] locationsArray = locations.toArray(new String[0]);
 
 
-        int optionPicked = options(s,"Travel Locations: ", locationsArray);
+        int optionPicked = input.give_options(s,"Travel Locations: ", locationsArray);
         // so if the optionsPicked number is greater then or equal to the player.location in areas.values()[], add 1
         if(optionPicked >= playerLocationInAreas) optionPicked++;
         print.s("Your input likely corrosponds to this location: " + areas.values()[optionPicked] + "\n");
 
         if(areas.values()[optionPicked].name().toLowerCase().equals("hathsin")){
-            boolean willing = option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No",true);
+            boolean willing = input.give_option(s,"Are you sure? No one has ever come back from the pits of hathsin","Yes","No",true);
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
@@ -182,7 +183,7 @@ class textGame {
             }
         }
         else{
-            boolean willing = option(s,"Are you willing?","Yes","No",true);
+            boolean willing = input.give_option(s,"Are you willing?","Yes","No",true);
             if(willing){
                 player.location = areas.values()[optionPicked];
                 player.time.addDay(6);
@@ -217,81 +218,17 @@ class textGame {
         print.pause();
         print.s("Your munnies you gots in yo purse: " + player.currency + "\n");
     }
-    public static player battle(player player, randomAreaEvents battle, Scanner s){
-        print.s("\n"+battle.description);
-        print.s("\n(There will be a proper battle system in the future)\n");
-        print.pause();
-        print.s("You Fight " + battle.enemyCount + " " + battle.enemy.name() + " And lose " + battle.healthOfEnemy(battle.enemy)*battle.enemyCount + " Health.");
-        player.health -= battle.healthOfEnemy(battle.enemy)*battle.enemyCount;
-        print.s("\nYou gain "+battle.currencyHeldOnEnemy(battle.enemy)*battle.enemyCount+" Boxings (currency)");
-        player.currency += battle.currencyHeldOnEnemy(battle.enemy)*battle.enemyCount;
+    public static player battle(player player, randomAreaEvents event, Scanner s){
+        player = battle.placeholder(player,event);
         return player;
     }
     public static player InfoEvent(player player, randomAreaEvents info, Scanner s){
         print.s(15,info.description);
         return player;
     }
-    public static String getInput(Scanner s){
-        String stringInput = s.nextLine();
-        return stringInput;
-    }
 
-    public static String cleanText(String input, boolean oneWord) {
-        // clean input: lowercase it, remove extra spaces if OneWord
-        input = input.toLowerCase();
-        if(oneWord) input = input.replaceAll("\\s", "");
-        return input;
-    }
-    public static boolean option(Scanner s, String prompt, String expectedValue, String negatoryValue,boolean showOptions){ // SINGLE OPTION for true / false type questions
-        print.s(String.format("%s %s %s %s %s %s\n", // look at this ridiculous thing
-        prompt,
-        (showOptions) ? "(" : "",
-        (showOptions) ? expectedValue : "",
-        (showOptions) ? "," : "",
-        (showOptions) ? negatoryValue : "",
-        (showOptions) ? ")" : ""));
-        // clean the text for comparisons
-        expectedValue = cleanText(expectedValue, false);
-        negatoryValue = cleanText(negatoryValue, false);
-        
-        boolean returnValue;
-        while(true) {
-            System.out.print(">>> ");
-            String input = cleanText(getInput(s),false);
 
-            if(input.equals(expectedValue)) {
-                returnValue = true;
-                break;
-            }
-            if(input.equals(negatoryValue)){
-                returnValue = false;
-                break;
-            }
-        }
-        return returnValue;
-    }
 
-    public static int options(Scanner s, String prompt, String[] values){ // MULTIPLE OPTION 
-        print.s(prompt + " (");
-        for(int i = 0; i < values.length-1; i++) print.s(String.format("%s, ", (values[i].toString())));
-        print.s(String.format("%s)\n",values[values.length-1].toString()));
-        // clean the text for comparisons
-        for(int z = 0; z < values.length; z++) values[z] = cleanText(values[z],true);
-        
-        int returnValue = -1; // 
-        boolean breakLoop = false;
-        while(!breakLoop) {
-            System.out.print(">>> ");
-            String input = cleanText(getInput(s),false);
-            for(int i = 0; i < values.length; i++) {
-                if(input.equals(values[i].toString())){
-                    returnValue = i;
-                    breakLoop = true;
-                }
-            }
-        }
-        return returnValue; // 
-    }
 }
 
 
