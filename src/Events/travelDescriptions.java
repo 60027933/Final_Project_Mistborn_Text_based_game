@@ -17,7 +17,8 @@ public class travelDescriptions {
                 options.add("\nYou approach what you can only assume is the infamous Pits of Hathsin. Massive cracks line the ground and you hear Skaa crying out in pain and anguish. \nWhat are you doing here, at the Lord Ruler's own kill camps? Still -  no one would expect a Skaa coming into the pits - you can probably still leave.");
                 break;
             case LUTHADEL:
-                options.add("\nYou arrive at the Capitol city of Luthadel, marveling at the massive walls. How will you get in? You don't have to wonder long - A skaa woman sees you gawking and Gestures at you to follow her. She leads you into the City, and as you turn to thank her, you realize she has already left, blending in with the crowds of Skaa.");
+                options.add("\nYou arrive at the Capitol city of Luthadel, marveling at the massive walls. How will you get in? You don't have to wonder long - A skaa sees you gawking at the city walls and gestures at you to follow her. She leads you into the City, and as you turn to thank her, you realize she has already left, blending in with the crowds of Skaa.");
+                options.add("\nYou arrive at the Capitol city of Luthadel, marveling at the massive walls. How will you get in? You slowly walk around the walls until you see a carriage exiting the city through a massive bronze gate. Without thinking, you dart in before the gates close.");
                 break;
             case TRESTING:
                 options.add("\nYou return to the place of your birth - the Tresting Plantation. In the absence of it's owners and the skaa, the fields have built up a large amount of ash. You walk through the old Skaa housings, reminiscing.");
