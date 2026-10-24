@@ -17,12 +17,12 @@ public class print {
             }
         }
     }
-    public static void s(int speed, String text){ // this is called method overloading, where it defaults to the function which parameters are filled.
+    public static void s(int waitTime, String text){ // this is called method overloading, where it defaults to the function which parameters are filled.
         text = wordWrap(text, 97);
         for(int i = 0; i < text.length(); i++){
             try{
                 System.out.print(text.charAt(i));
-                Thread.sleep(speed);
+                Thread.sleep(waitTime);
             } catch (InterruptedException e) {
                 System.out.println("Thread was interrupted.");
                 // best practice somehow?
@@ -49,10 +49,12 @@ public class print {
         int lineLength = 0;
 
         for (String word : words) {
+            boolean thisWordLowkegoonuinely_TM_hasALineBreak = word.contains("\n") ? true : false;
+            if(thisWordLowkegoonuinely_TM_hasALineBreak) lineLength = 0; // it should respect our existing line breaks
             if (lineLength + word.length() + 1 > maxWidth) {
                 result.append("\n");
                 lineLength = 0;
-            } else if (lineLength > 0) {
+            } else if (lineLength > 0 || thisWordLowkegoonuinely_TM_hasALineBreak) {
                 result.append(" ");
                 lineLength++;
             }
@@ -62,3 +64,7 @@ public class print {
         return result.toString();
 }
 }
+
+
+
+
