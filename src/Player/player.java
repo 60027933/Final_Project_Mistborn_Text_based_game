@@ -11,16 +11,24 @@ public class player {
         public calandar time;
         public areas location;
         public int dmg;
+        public float def;
+        public float evasion;
+        public float accuracy;
+
         public int currency;
         public int phase = 0;
         public boolean[] areasVisited = new boolean[areas.values().length];
         public String lastEventDescription = "Null and Void Starter Description";
 
-        public player(int health, calandar time, areas location, int dmg, int currency){
+        public player(int health, calandar time, areas location, int dmg, float def, float evasion , float accuracy, int currency){
             this.health = health;
             this.time = time;
             this.location = location;
             this.dmg = dmg;
+            this.def = def;
+            this.evasion = evasion;
+            this.accuracy = accuracy;
+
             this.currency = currency;
         }
         public randomAreaEvents pickEvent(){
