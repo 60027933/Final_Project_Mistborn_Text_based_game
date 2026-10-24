@@ -19,17 +19,19 @@ public class battle {
             if(player_wants_to_flee){
                 int coinflip = r.nextInt(2);
                 if(coinflip == 0){
-                    print.s("You successfully flee the encounter.");
+                    print.s(pickOption.fromStrings(new String[]{"You manage to get away.","You successfully flee!"}, r));
                     break;
                 }else{
                     print.s(pickOption.fromStrings(new String[]{"You try to flee, but done got yanked by the collar backwards.","You fail to flee."}, r));
                 }
             }else{
                 // attack
+                print.s("You attack!");
+                
 
             }
             //Enemy Attacks.
-            
+
         }
         return player;
     }
