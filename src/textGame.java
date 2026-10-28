@@ -23,23 +23,23 @@ class textGame {
         float defense = 0f;
         float evasion = 0.1f;
         float accuracy = 0.8f;
-
+        boolean quickTest = false;
         player player = new player(health,time,location,dmg,defense,evasion,accuracy,currency);
         //ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
-        if(checkPlayerUnderstanding(s)){
-            beginStory(s);
-            player = gameTurn(player,s);
-        // at the beginning of the story, you escape from tresting plantation after it is burned down by kelsier.
-        // no knowledge of allomancy or anything; as you encounter it it will be explained.
-        //enum list inventory dynamic array?
-        //from inventory array: select weapon, store that in variable
-
-        // location / map here?
-        //each location needs a certain number of related 'filler' events
-
+        if(quickTest){
+            player = gameTurn(player, s);
         }
-         // FOR QUICKER TESTS:
-        // player = gameTurn(player, s);
+        else{
+            if(checkPlayerUnderstanding(s)){
+                beginStory(s);
+                player = gameTurn(player,s); // recursive function; It calls itself again and again until the game ends
+
+                //enum list inventory dynamic array?
+                //from inventory array: select weapon, store that in variable
+                //ascii map?
+
+            }
+        }
         s.close();
     }
     public static boolean checkPlayerUnderstanding(Scanner s){
@@ -52,10 +52,10 @@ class textGame {
             if(!spoilers){ print.s("\nGo read Mistborn. It's a fantastic book. This game can wait fr"); returnValue = false;}
             if(!understanding && spoilers) {
                 print.s("Alright. I'm about to get you up to speed on the basic lore, so feel free to opt out now:");
-                if(!input.give_option(s,"\n( Yes [opt out], No [continue the game] )","Yes","No",false)){
+                if(input.give_option(s,"\n( Continue , Exit )","Continue","Exit",false)){
                     print.pause();print.pause();
 
-                    print.s(30,"\n1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people in his kingdom were split into two classes based off whether they supported him: The Skaa, or slaves, did not, and the Nobility did.");
+                    print.s(30,"\n1000 years ago the world was conquered by an immortal leader called the Lord Ruler. The people in his kingdom were split into two classes based off whether they supported him: The Skaa, or slaves, did not, and the Nobility, who did.");
                     print.wait(s);
                 }else{returnValue = false;}
             }   
@@ -268,9 +268,4 @@ class textGame {
         print.s(15,info.description);
         return player;
     }
-
-
-
 }
-
-

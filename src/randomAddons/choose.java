@@ -4,7 +4,7 @@ import java.util.*;
 import src.Enums.enemies;
 import src.Enums.eventTypes;
 
-public class pickOption {
+public class choose {
     public static enemies fromEnemyTypes(enemies[] choices, Random r){ // application: pickOption.fromEnemyTypes
         enemies enemyChosen = enemies.SKAA_BANDIT; // default
         enemyChosen = choices[r.nextInt(choices.length)];

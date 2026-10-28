@@ -2,8 +2,7 @@ package src.Player;
 import src.Events.*;
 import src.Enums.*;
 import src.Time.calandar;
-import src.randomAddons.pickOption;
-
+import src.randomAddons.*;
 import java.util.Random;
 
 public class player {
@@ -35,14 +34,14 @@ public class player {
             Random r = new Random();
             randomAreaEvents returnValue = new randomAreaEvents(eventTypes.ENEMY, this.location); // default value
             for(int count = 0; count < 100; count++){ // number of iterations trying to get a unique previous event 
-                eventTypes eventType = pickOption.fromEventTypes(new eventTypes[]{eventTypes.ENEMY,eventTypes.INFO},r);
+                eventTypes eventType = choose.fromEventTypes(new eventTypes[]{eventTypes.ENEMY,eventTypes.INFO},r);
                 returnValue = new randomAreaEvents(eventType, this.location);
                 if(!returnValue.description.equals(lastEventDescription)){
                     lastEventDescription = returnValue.description;
                     break;
                 }
             }
-            return returnValue;
+            return returnValue; 
         }
         
     }

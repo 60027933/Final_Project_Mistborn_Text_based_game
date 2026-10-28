@@ -24,7 +24,7 @@ public class travelDescriptions {
                 options.add("\nYou return to the place of your birth - the Tresting Plantation. In the absence of it's owners and the skaa, the fields have built up a large amount of ash. You walk through the old Skaa housings, reminiscing.");
                 break;
         }
-        if(!options.isEmpty()) {desc = pickOption.fromStrings(options.toArray(new String[0]),r);}
+        if(!options.isEmpty()) {desc = choose.fromStrings(options.toArray(new String[0]),r);}
         return desc;
     }
 }

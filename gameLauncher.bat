@@ -115,6 +115,7 @@ if %elapsed_cs% lss 10 set "elapsed_cs=0%elapsed_cs%"
 echo  Finished compiling in %elapsed_s%.%elapsed_cs%s
 echo.
 
+echo Attempting fullscreen...
 :: ── Maximize the console window ───────────────────────────────────────────────
 powershell -command "Add-Type -Name W -Namespace '' -MemberDefinition '[DllImport(\"user32.dll\")] public static extern bool ShowWindow(IntPtr h, int n); [DllImport(\"kernel32.dll\")] public static extern IntPtr GetConsoleWindow();'; [W]::ShowWindow([W]::GetConsoleWindow(), 3)"
 
@@ -124,5 +125,5 @@ cls
 mode con: cols=100 lines=40
 
 java -cp bin src/textGame
-
+pause
 echo.

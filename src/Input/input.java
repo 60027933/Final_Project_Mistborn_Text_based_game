@@ -48,13 +48,18 @@ public class input {
     }
 
     public static int give_options(Scanner s, String prompt, String[] values){ // MULTIPLE OPTION 
-        print.s(prompt + " (");
-        for(int i = 0; i < values.length-1; i++) print.s(String.format("%s, ", (values[i].toString())));
-        print.s(String.format("%s)\n",values[values.length-1].toString()));
+        print.s(prompt + " ( ");
+        for(int i = 0; i < values.length; i++)
+        {
+            print.s(String.format("%s", (values[i].toString())));
+            if(i < values.length-1)print.s(", ");
+        }
+        print.s(")\n");
+        
+        
         // clean the text for comparisons
         for(int z = 0; z < values.length; z++) values[z] = str.simple_clean(values[z],true);
-        
-        int returnValue = -1; // 
+        int returnValue = -1; // default, no option chosen
 
         boolean inputRecognized = false;
         while(!inputRecognized) {

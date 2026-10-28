@@ -9,27 +9,40 @@ public class battle {
     public static player fight(player player, randomAreaEvents event, Scanner s){
         
         print.s("\n"+event.description);
+        
         Random r = new Random();
         //Start: Give battle information. Give Battle options at the top.
         print.s("\nYou can: Flee (50/50 chance), Fight (" + player.dmg + " dmg)");
         while(player.health > 0 && enemiesAreStillAlive(event)){
+            
+            //Display health of enemy/enemies
+            print.s(event.enemyCount > 1 ? "More than one enemy. I can't deal with this..." : String.format(
+                "\nThe %s has ___ health",
+                str.toTitleCase(event.enemy.name()).replace('_',' ')
+            ));
             //Get player input.
             boolean player_wants_to_flee = input.give_option(s,"","Flee","Fight",false);
             //Player Attacks or attempts to flee.
             if(player_wants_to_flee){
                 int coinflip = r.nextInt(2);
                 if(coinflip == 0){
-                    print.s(pickOption.fromStrings(new String[]{"You manage to get away.","You successfully flee!"}, r));
+                    print.s(choose.fromStrings(new String[]{"You manage to get away.","You successfully flee!"}, r));
                     break;
                 }else{
-                    print.s(pickOption.fromStrings(new String[]{"You try to flee, but done got yanked by the collar backwards.","You fail to flee."}, r));
+                    print.s(choose.fromStrings(new String[]{"You try to flee, but done got yanked by the collar backwards.","You fail to flee."}, r));
                 }
             }else{
                 // attack
-                print.s("You attack!");
-                
-
+                if(event.enemyCount == 1){
+                    print.s(String.format("You attack for %d Damage!",player.dmg));
+                    
+                }
+                else{
+                    print.s("So, there are multiple enemies.... I don't know how to handle this.");
+                }
             }
+            print.pause();
+            if(event.enemyCount == 1) print.s("\nThe " + event.enemy.name() + " Attacks.");
             //Enemy Attacks.
 
         }
