@@ -38,6 +38,14 @@ public class print {
             Thread.currentThread().interrupt();
         }
     }
+    public static void pause(int interations){
+        try{
+            Thread.sleep(500*interations);
+        } catch (InterruptedException e) {
+            System.out.println("Thread was interrupted.");
+            Thread.currentThread().interrupt();
+        }
+    }
     public static void wait(Scanner s){
         // wait for player to hit enter
         System.out.print("\n(hit enter to continue)");
