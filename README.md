@@ -3,3 +3,7 @@ A text-based adventure game based on the world of Mistborn. Your goal will be to
 The hope is that eventually it will read like a book, and at the end when you die or survive you can read through the adventure.
 
 
+# HOW TO PLAY:
+
+On windows:
+double click "gameLauncher.BAT - Shortcut.lnk"
