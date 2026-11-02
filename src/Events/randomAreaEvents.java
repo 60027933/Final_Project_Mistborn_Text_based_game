@@ -14,12 +14,13 @@ public class randomAreaEvents {
     
     public eventTypes eventType;
     public String description;
-    public enemies enemy;
+    public enemies enemyType;
     public int enemyCount = 1;
+    public int dmg;
     public randomAreaEvents(eventTypes eventType, areas area){
         this.eventType = eventType;
-        this.enemy = pickEnemyFromLocation(area);
-        this.description = pickDescriptionFromOtherFactors(area, enemy);
+        this.enemyType = pickEnemyFromLocation(area);
+        this.description = pickDescriptionFromOtherFactors(area, enemyType);
     }
     public String pickDescriptionFromOtherFactors(areas area,enemies enemy){
         String desc = "Default event decription";
@@ -31,8 +32,8 @@ public class randomAreaEvents {
                 case LUTHADEL:
                     switch(enemy){
                         case SKAA_BANDIT:
-                            options.add(50.0, new fightDescription(1,"(p)You approached by a skaa bandit fr"));
-                            options.add(70.0, new fightDescription(1,"You walk through the grimy, ashen streets of cobblestone Skaa slums. The streets are compact, lined with multi-story hovels and tenaments with only the occasional boarded-up window. The streets are filled with beggars and the sick, and you hear coughing ring out as you pass an alley. You decide to head back, but before you do, someone taps on your shoulder. You swivel around, and come face to face with a Skaa Bandit!"));
+                            options.add(50.0, new fightDescription(1,"(p)You are approached by a skaa bandit fr"));
+                            options.add(70.0, new fightDescription(1,"You walk through the grimy, ashen streets of cobblestone Skaa slums. The streets are compact, lined with multi-story hovels and tenaments with only the occasional boarded-up window to catch your attention. The streets are filled with beggars and the sick, and you hear coughing ring out as you pass an alley. You decide to head back, but before you do, someone taps on your shoulder. You swivel around, and come face to face with a Skaa Bandit!"));
                             options.add(20.0, new fightDescription(4,"Your footsteps sound through the ash-covered cobbled streets of the Skaa Slums. You see a lack of people, but don't register what it means until too late - you find yourself surrounded by skaa bandits!"));
                             break;
                         case TINEYE_CLERGY:
@@ -64,7 +65,8 @@ public class randomAreaEvents {
                 case TRESTING:
                     switch(enemy){
                         case SKAA_BANDIT:
-                            options.add(50.0, new fightDescription(1,"As you wander the ash-covered fields of the Tresting plantation, you see a Skaa bandit, probably a former worker, approach you with a knife. He demands for everything that you have."));
+                            options.add(50.0, new fightDescription(1,"As you wander the ash-covered fields of the Tresting plantation, a Skaa bandit, probably a former worker like you, approaches you with a knife." 
+                        +"\n\"Give me everything you have!\" He demands. "));
                             break;
                         case CLERGY_SCOUT:
                             break;
@@ -100,18 +102,18 @@ public class randomAreaEvents {
 
             switch(area){
                 case LUTHADEL:
-                    options.add(50.0,"\n(P)Luthadel Observations");
-                    options.add(50.0,"\n(P)Walk by the manors");
-                    options.add(10.0,"\n(P)Watched by an inquisitor");
+                    options.add(50.0,"\n(P)You walk through Luthadel, making some clever observations");
+                    options.add(50.0,"\n(P)You walk by the expensive Luthadel manors");
+                    options.add(10.0,"\n(P)You are Watched by an inquisitor, who lets you go for now...");
                     options.add(20.0,"\n(P)You see a Skaa crew at work");
                     break;
                 case TRESTING:
-                    options.add(50.0,"\n(P)Tresting Observations");
-                    options.add(50.0,"\n(P)Walk through the wrecked manor");
+                    options.add(50.0,"\n(P)You walk around tresting, making some observations");
+                    options.add(50.0,"\n(P)You walk through the burnt manor");
                     break;
                 case FELLIS:
-                    options.add(50.0,"\n(P)Walk through the pleasant, clean streets");
-                    options.add(50.0,"\n(p)Small talk with a noble lord");
+                    options.add(50.0,"\n(P)You walk through the pleasant, clean streets");
+                    options.add(50.0,"\n(p)You make small talk with a noble lord");
                     break;
                 case HATHSIN:
                     options.add(50.0,"\n(P)Stomach turning Pits descriptions");
@@ -161,27 +163,35 @@ public class randomAreaEvents {
         switch(enemy){
             case IMMATURE_KOLOSS:
                 health = 40;
+                dmg = 30;
                 break;
             case MATURE_KOLOSS:
                 health = 150;
+                dmg = 60;
                 break;
             case CLERGY_SCOUT:
                 health = 20;
+                dmg = 5;
                 break;
             case TINEYE_CLERGY:
                 health = 50;
+                dmg = 5;
                 break;
             case STEEL_INQUISITOR:
                 health = 250;
+                dmg = 90;
                 break;
             case SKAA_BANDIT:
                 health = 20;
+                dmg = 7;
                 break;
             case NOBLE_GUARD:
                 health = 50;
+                dmg = 15;
                 break;
             case HATHSIN_GUARD:
                 health = 50;
+                dmg = 20;
                 break;
         }
         return health;
