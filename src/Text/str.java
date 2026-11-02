@@ -16,7 +16,7 @@ public class str {
         boolean nextTitleCase = true;
 
         for (char c : input.toCharArray()) {
-            if (Character.isSpaceChar(c) || c == '_') { 
+            if (Character.isSpaceChar(c) || c == '_') {  // did you know that " denotes string and ' denotes char? just wild
                 nextTitleCase = true;
             } else if (nextTitleCase) {
                 c = Character.toTitleCase(c); // Safe for Unicode
