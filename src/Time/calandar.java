@@ -58,7 +58,7 @@ public class calandar {
         }
     }
 
-    public String printDate(){
+    public String timeFormat(){
         String[] months = {"January", "February","March","April","May","June","July","August","September","October","November","December"};
         return String.format("%s %d OF YEAR %d\n",months[month].toUpperCase(),day,year);
     }
