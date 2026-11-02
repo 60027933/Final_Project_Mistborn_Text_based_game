@@ -19,6 +19,8 @@ public class input {
         (showOptions) ? "," : "",
         (showOptions) ? negatoryValue : "",
         (showOptions) ? ")" : ""));
+        //above ain't super easy to understand; on the chopping block for refactor
+
         // clean the text for comparisons
         expectedValue = str.simple_clean(expectedValue, false);
         negatoryValue = str.simple_clean(negatoryValue, false);
@@ -79,7 +81,7 @@ public class input {
         print.s(prompt + " (");
         for(int i = 0; i < values.length-1; i++) print.s(String.format("%s, ", (values[i].toString())));
         print.s(String.format("%s)\n",values[values.length-1].toString()));
-        print.s("\nAlso, type 'Exit' to exit\n");
+        print.s("Also, type 'Exit' to exit\n");
         // clean the text for comparisons
         for(int z = 0; z < values.length; z++) values[z] = str.simple_clean(values[z],true);
         
