@@ -3,9 +3,9 @@ package src;
 //import java.nio.channels.InterruptedByTimeoutException;
 import java.util.*;
 import src.Events.*;
+import src.Character.*;
 import src.Enums.*;
 import src.Time.calandar;
-import src.Player.*;
 import src.Text.*;
 import src.Input.*;
 
@@ -20,9 +20,11 @@ class textGame {
         areas location = areas.TRESTING;
         int dmg = 5;
         int currency = 0;
-        float defense = 0f;
-        float evasion = 0.1f;
-        float accuracy = 0.8f;
+        //IN PERCENTAGE:
+        double defense = 0.0; 
+        double evasion = 0.1;
+        double accuracy = 0.8;
+
         boolean quickTest = false;
         player player = new player(health,time,location,dmg,defense,evasion,accuracy,currency);
         //ArrayList<String> log = new ArrayList<String>(); // functions: add(), get(), set(), remove(),
@@ -41,6 +43,18 @@ class textGame {
             }
         }
         s.close();
+    }
+    public static player restart(player player){
+        calandar time = new calandar(0,0,0);
+        int health = 100;
+        areas location = areas.TRESTING;
+        int dmg = 5;
+        int currency = 0;
+        double defense = 0;
+        double evasion = 0.1;
+        double accuracy = 0.8;
+        player rplayer = new player(health,time,location,dmg,defense,evasion,accuracy,currency);
+        return rplayer;
     }
     public static boolean checkPlayerUnderstanding(Scanner s){
         boolean returnValue = true;
@@ -73,16 +87,30 @@ class textGame {
         print.s("I guess all this text is kind of placeholder...");
         print.pause();
         print.s("\nSo it really just denotes EXTREMELY placeholder.");
-        print.pause();print.pause();print.pause();print.pause();
+        print.pause(4);
         print.s("\n\nWith that said, let's get into the story.");
-        print.pause();print.pause();
+        print.pause(2);
         print.s("\n\nYou are a skaa assigned to work the fields in the TRESTING PLANTATION.");
-        print.pause();print.pause();
-        print.s("\nA strange man in a strange cloak showed up yesterday who called himself Kelsier, the survivor of Hathsin. And this morning the manor is burning.");
-        print.pause();
-        print.s("\nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors find the burned manor and dead nobility, they will assume the skaa were responsible.");
-        print.pause();print.pause();
-        print.s(30,"\nYou choose not to go which the other skaa in hiding, but rather to set out on your own in search of a better life.");
+        print.pause(8);
+        print.s("\nNow, after yet another harsh workday, you find yourself nodding off to sleep....");
+        print.pause(20);
+        print.s("\nYou hear screams from outside!");
+        print.pause(10);
+        print.s("\nWhat's going on? You almost rush outside, but are stopped by the mists...");
+        print.pause(15);
+        print.s("\nNevertheless, mustering up your courage, you manage to peak out the door.");
+        print.pause(5);
+        print.s("\nThe Manor is burning.");
+        print.pause(5);
+        print.s("\nBut what can you do except wait until morning?");
+        print.pause(20);
+        print.s("\nIt was a long, sleepless night. Eventually, the sun rose and the mists faded and you rushed outside to find out what was going on.");
+        print.pause(5);
+        print.s("\n\nIt turns out that a strange man in a strange cloak showed up yesterday who called himself Kelsier, the survivor of Hathsin. He entered the Manor and burned it to the ground, killing everyone inside to save a little girl.");
+        print.pause(3);
+        print.s("\nThe Survivor of Hathsin made sure that you had no choice but to flee; when the inquisitors find the burned manor and dead nobility, they will assume the skaa (YOU) were responsible.");
+        print.pause(5);
+        print.s(30,"\nYou choose not to go with the other skaa in hiding, but rather to set out on your own in search of a better life.");
         print.pause();
         if(input.give_option(s,"\nDo you need a tutorial?","Yes","No",true)){
             print.s(30,"So instead of proper tutorial, I'm just going to vaguely explain a couple of mechanics and leave the rest to you.");
@@ -93,11 +121,12 @@ class textGame {
                 +   "\n(3)  Explore, which gives you one of many random encounters, and"
                 +   "\n(4)  Status, which tells you your stats."
             );
-            print.pause();
-            print.s("Speaking of Stats..."
+            print.pause(2);
+            print.s("\nSpeaking of Stats..."
                 +   "\nDEFENSE is measured in percentage removed from enemy (for example, a peice of armour may grant 10% damage reduction)"
                 +   "\nACCURACY is how accurate your attacks are, measured in percent"
                 +   "\nEVASION is your change to evade damage, measured in percent"
+                +   "\n\nIn a fight, you can FLEE, which always has a 50/50 chance."
             );
         }else{
             print.s("\nNo tutorial. Got it.");
@@ -107,7 +136,7 @@ class textGame {
     }
     public static player gameTurn(player player, Scanner s){
         player.time.addDay(1);
-        print.s("\n"+player.time.printDate());
+        print.s(String.format("\n%s\n%s",player.location, player.time.timeFormat()));
         //first: is there any immediate time based events that are happening right now? if so do that
         //second: is there any time and location based "Special" events happening right now? if so do that
         //third: 'regular turn'
@@ -115,9 +144,29 @@ class textGame {
         //then, recursively call itself until the final event in (assume it's like year three or something)
         
         player.phase = player.time.year - 1;
-        if(player.time.getYear() < 3) {
+        if(player.time.getYear() < 3 && player.health > 0) {
             print.wait(s);
             player = gameTurn(player, s);
+        }else{
+            player = gameEnd(player,s);
+        }
+        return player;
+    }
+    public static player gameEnd(player player, Scanner s){
+        print.s("\n\nGAME OVER\n");
+        print.s("STATS:");
+        print.s("You survived until " + player.time.timeFormat() +".");
+        player.status();
+        print.pause();
+        print.s("\n\n\nTYPE ANYTHING AND HIT ENTER TO RESTART.");
+        player = restart(player);
+        s.next();
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        if(checkPlayerUnderstanding(s)){
+                beginStory(s);
+                player = gameTurn(player,s);
         }
         return player;
     }
@@ -138,7 +187,7 @@ class textGame {
             player = travel(player,s);
         }
         if(turn == turnOptions.STATUS) {
-            status(player);
+            player.status();
             player = regularTurn(s,player);
         }
         return player;
@@ -234,33 +283,12 @@ class textGame {
     }
     public static player explore(player player, Scanner s){
         randomAreaEvents exploreEvent = player.pickEvent(); // eventType, description, enemies
-        if(exploreEvent.eventType == eventTypes.ENEMY) player = battle(player,exploreEvent,s);
+        if(exploreEvent.eventType == eventTypes.ENEMY) player = battleEvent(player,exploreEvent,s);
         else if(exploreEvent.eventType == eventTypes.INFO) player = InfoEvent(player,exploreEvent,s);
         return player;
     }
-    public static void status(player player){
-        print.s("\nYou are at " + player.location.name());
-        print.pause();
-        print.s("\nToday is: " + player.time.printDate());
-        print.pause();
-        print.s("Battle stats:"
-            +   "\n\t"
-            +       "Health: "
-            +           player.health
-            +   "\n\t"
-            +       "Defense: "
-            +           player.def
-            +   "\n\t"
-            +       "Evasion: "
-            +           player.evasion
-            +   "\n\t"
-            +       "Accuracy:"
-            +           player.accuracy
-        );
-        print.pause();
-        print.s("\nThe coins you have in your purse: " + player.currency + "\n");
-    }
-    public static player battle(player player, randomAreaEvents event, Scanner s){
+
+    public static player battleEvent(player player, randomAreaEvents event, Scanner s){
         player = battle.fight(player,event,s);
         return player;
     }
